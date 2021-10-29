@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>User_Name's Profile RezoForge: Tabletop Game Organizer</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>RezoForge</h1>
+        </div>
+        <form>
+            <input placeholder="Search">
+            <button>Find</button>
+        </form>
+        <div>
+            <button id="logoutButton">Logout</button>
+        </div>
+    </header>
+    <main>
+        <div id="leftPanel" class="panel">
+            <p>Hi</p>
+        </div>
+        <div id="centerPanel" class="panel">
+            <div id="tabs">
+                <h3>Timeline</h3>
+                <h3>Armies</h3>
+            </div>
+            <div>
+                <div>
+                    <h4>September 29, 2021</h4>
+                    <div class="like">
+                        <img onclick="flike(1)" src="assets/heart.png" alt="heart" class="heart">
+                        <p id="likesCount1">0</p>
+                    </div>
+                    <p>This was a good game Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div>
+                    <h4>September 29, 2021</h4>
+                    <div class="like">
+                        <img onclick="flike(2)" src="assets/heart.png" alt="heart" class="heart">
+                        <p id="likesCount2">0</p>
+                    </div>
+                    <p>This was a good game Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div>
+                    <h4>September 29, 2021</h4>
+                    <div class="like">
+                        <img onclick="flike(3)" src="assets/heart.png" alt="heart" class="heart">
+                        <p id="likesCount3">0</p>
+                    </div>
+                    <p>This was a good game Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+        <div id="rightPanel" class="panel">
+            <h2>{{ htmluser }}</h2>
+            <img src="assets/profilePic.jpg" alt="Profile_Pic" id="profilePic">
+            <div>
+                <a href="#">Friends</a>
+                <a href="#">Send game request</a>
+                <a href="#">Send Friend Request</a>
+                <a href="#">Invite to event</a>
+                <a href="#">Block</a>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    border: 1px red solid;
+}
+
+body {
+    width: 90%;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 10%;
+    padding: 10px;
+    background-color: #777;
+}
+
+main {
+    display: flex;
+    margin-top: 20px;
+}
+
+button, a, img {
+    cursor: pointer;
+}
+
+#logoutButton {
+    padding: 8px;
+    background-color: tomato;
+}

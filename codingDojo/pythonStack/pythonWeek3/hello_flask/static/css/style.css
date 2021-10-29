@@ -1,0 +1,13 @@
+*{
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    border: 1px solid red;
+}
+
+p{
+    background-color:sandybrown ;
+    color: slateblue;
+    padding: 10px;
+    display: inline-block;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Man</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .row {
+            line-height: 0;
+        }
+        .wall {
+            background-color: blue;
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+        }
+        .sushi {
+            background-color: black;
+            display: inline-block;
+            background-image: url("assets/sushi.png");
+            background-size: contain;
+            height: 40px;
+            width: 40px;
+        }
+        .blank {
+            background-color: black;
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+        }
+        #ninjaman {
+            background-color: black;
+            display: inline-block;
+            background-image: url('assets/ninja.gif');
+            background-size: contain;
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            top: 40px;
+            left: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='world'></div>
+    <div id='ninjaman'></div>
+</body>
+<script type="text/javascript"> //drawWorldFunction
+    var world = [
+        [1,1,1,1,1,1,1],
+        [1,0,2,2,1,2,1],
+        [1,2,1,2,2,2,1],
+        [1,2,2,2,1,2,1],
+        [1,2,1,1,1,2,1],
+        [1,2,2,2,2,2,1],
+        [1,1,1,1,1,1,1],
+    ];
+    var worldDict = {
+        0: 'blank',
+        1: 'wall',
+        2: 'sushi'
+    }
+
+    function drawWorld() {
+        output = "";
+        
+        for(var row = 0; row < world.length; row++){
+            output += "<div class='row'>"
+            for(var x = 0; x < world[row].length; x++){
+                output += "<div class='" + worldDict[world[row][x]] +"'></div>"
+            }
+            output += "</div>"
+        }
+        document.getElementById("world").innerHTML = output;
+    }
+
+    drawWorld()
+
+</script>
+</html>

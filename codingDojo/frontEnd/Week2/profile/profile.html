@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Profile</title>
+</head>
+<body>
+    <header id="topBar">
+        <div id="topBarLeft">
+            <h1>Profile</h1>
+            <a href="#" class="navBar">Home</a>
+            <a style="font-weight:bold" href="#" class="navBar" id="activeNav">My Profile</a>
+            <a href="#" class="navBar">Find Connections</a>
+        </div>
+        <div id="topBarRight">
+            <div>
+                <input id="signOutButton" type="sign out" value="Sign Out">
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class=mainHalf>
+            <div class="module">
+                <div class="userBar">
+                    <img id="userPic" src="images/jane-m.jpg" alt="profPic">            
+                </div>
+                <div id="userDesc">
+                    <h2> Jane Doe</h2>
+                    <div class="loc">
+                        <img class="icon" src="icons/map-marker.png" alt=mapMarker>
+                        <h3>Seattle, WA</h3>
+                    </div>
+                    <div>
+                        <p>
+                            Developer | Engineer | Problem Solver <br>
+                            Master of shadows and the Internet!
+                        </p>
+                    </div>
+                    <div>
+                        <img class="icon" src="icons/gear.png" alt="gear"></img>
+                        <a href="#">edit profile</a>
+                    </div>
+                </div>
+            </div>
+            <div id="educationContainer" class="module">
+                <header class="headerModule">
+                    <h3>Education</h3>
+                </header>
+                <div class="bodyModule" id="educationBody">
+                    <h4>Coding Dojo - Full Stack Bootcamp</h4>
+                    <h5>Dec 2019 - Mar 2020</h5>
+                    <p>Triple black belt in Python, MERN, and C#</p>
+                </div>
+            </div>
+        </div>
+        <div class="mainHalf">
+            <div id="connReq" class="module">
+                <header class="headerModule">
+                    <h3>Connection Requests</h3>
+                </header>
+                <div class="bodyModule">
+                    <div class="reqProf">
+                        <div class="profList">
+                            <img class="profPic" src="images/todd-s.jpg" alt="profPicTodd">
+                            <h4>Todd E</h4>
+                        </div>
+                        <div>
+                            <img class="reqIcon" src="icons/accept-circle.png" alt="accept">
+                            <img class="reqIcon" src="icons/close-circle.png" alt="reject">
+                        </div>
+                    </div>
+                    <div class="reqProf">
+                        <div class="profList">
+                            <img class="profPic" src="images/phil-s.jpg" alt="profPicPhil">
+                            <h4>Phil K</h4>
+                        </div>
+                        <div>
+                            <img class="reqIcon" src="icons/accept-circle.png" alt="accept">
+                            <img class="reqIcon" src="icons/close-circle.png" alt="reject">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="yourConn" class="module">
+                <header class="headerModule">
+                    <h3>Your Connections</h3>
+                </header>
+                <div class="bodyModule">
+                    <div class="profList">
+                        <img class="profPic" src="images/adrien-s.jpg" alt="profPicAdrian">
+                        <h4>Adrien D</h4>
+                    </div>
+                    <div class="profList">
+                        <img class="profPic" src="images/anne-s.jpg" alt="profPicAnne">
+                        <h4>Anne J</h4>
+                    </div>
+                    <div class="profList">
+                        <img class="profPic" src="images/alayne-s.jpg" alt="profPicAlayne">
+                        <h4>Alayne T</h4>
+                    </div>
+                    <div class="profList">
+                        <img class="profPic" src="images/arry-s.jpg" alt="profPicArry">
+                        <h4>Arry Y</h4>
+                    </div>
+                    <footer id="friendsListFooter">
+                        <a href="#">View More</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

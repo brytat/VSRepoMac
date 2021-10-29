@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Likes</title>
+</head>
+<body>
+    <header>
+        <h1>Network</h1>
+        <h2>Your Feed</h2>
+    </header>
+    <main>
+        <div id="leftPanel" class="panel">
+            <img src="img/download.jpg" alt="profPic" id="profPic">
+            <a href="#">Add an avatar</a>
+            <h3>James Doe</h3>
+        </div>
+        <div id="rightPanel" class="panel">
+            <div class="userEntry">
+                <span>
+                    <h3>User 1</h3>
+                    <h4 id="user1">0 like(s)</h4>
+                    <button onclick="addOneLike(1)">Like</button>
+                </span>
+                <div>
+                    <p>This is just some filler text, it can sat anything we like.</p>
+                </div>
+            </div>
+            <div class="userEntry">
+                <span>
+                    <h3>User 2</h3>
+                    <h4 id="user2">0 like(s)</h4>
+                    <button onclick="addOneLike(2)">Like</button>
+                </span>
+                <div>
+                    <p>This is just some filler text, it can sat anything we like.</p>
+                </div>
+            </div>
+            <div class="userEntry">
+                <span>
+                    <h3>User 3</h3>
+                    <h4 id="user3">0 like(s)</h4>
+                    <button onclick="addOneLike(3)">Like</button>
+                </span>
+                <div>
+                    <p>This is just some filler text, it can sat anything we like.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+        <script src="script.js"></script>
+    </body>
+    </html>

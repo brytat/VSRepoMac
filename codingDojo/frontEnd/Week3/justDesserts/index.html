@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Just Dessert</title>
+</head>
+<body>
+<div id="content">
+    <header>
+        <div id="titlePanel">
+            <div>
+                <h1 class="white">Just</h1><h1 class="darkOrange">Dessert</h1>
+            </div>
+            <div>
+                <button id="joinButton" onclick="fhide(this)">Join</button>
+                <button class="white">Login</button>
+            </div>
+        </div>
+        <div id="navBar">
+            <span>
+                <input type="text" name="recipeSearch" placeholder="Search" id="recipeSearch">
+                <button class="white" onclick="fsearch()">Go</button>
+            </span>
+            <div class="navButtons">
+                <img src="imgs/cake.png" alt="cakes" class="headerPic">
+                <h4>Cakes</h4>
+            </div>
+            <div class="navButtons">
+                <img src="imgs/ice-cream.png" alt="iceCream" class="headerPic">
+                <h4>Ice Cream</h4>
+            </div>
+            <div class="navButtons">
+                <img src="imgs/cookie.png" alt="cookies" class="headerPic">
+                <h4>Cookies</h4>
+            </div>
+            <div class="navButtons">
+                <img src="imgs/pie.png" alt="pies" class="headerPic">
+                <h4>Pies</h4>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="mainPanel">
+            <h2>Recipe of the Day</h2>
+            <div class="recipe"> <!--main recipe on the page-->
+                <img src="imgs/orange-tart.jpg" alt="orangeTart">
+                <div class="recipeDesc">
+                    <div>
+                        <h5 id="dessertEntryName1">Orange Jelly Tart</h5>
+                        <p>by:
+                            <a href="#">yuripiano</a>
+                        </p>
+                    </div>
+                    <div class="like">
+                        <img onclick="flike(1)" src="imgs/heart.png" alt="heart" class="heart">
+                        <p id="likesCount1">0</p>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <a href="#">See Full Recipe</a>                
+            </footer>
+        </div>
+        <div id="sidePanel">
+            <h3>Recommended for you:</h3>
+            <div class="recipe"> <!--first suggested recipe on the page-->
+                <img src="imgs/macarons.jpg" alt="macaroons">
+                <div>
+                    <div class="recipeDesc">
+                        <div>
+                            <h5 id="dessertEntryName2">Macaroons</h5>
+                            <p>by:
+                                <a href="#">EmilieW</a>
+                            </p>
+                        </div>
+                        <div class="like">
+                            <img onclick="flike(2)" src="imgs/heart.png" alt="heart" class="heart">
+                            <p id="likesCount2">0</p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="recipe"> <!--second suggested recipe on the page-->
+                <img src="imgs/creme-brulee.jpg" alt="cemeBrulee">
+                <div>
+                    <div class="recipeDesc">
+                        <div>
+                            <h5 id="dessertEntryName3">Crème Brûlée</h5>
+                            <p>by:
+                                <a href="#">MarisaG</a>
+                            </p>
+                        </div>
+                        <div class="like">
+                            <img onclick="flike(3)" src="imgs/heart.png" alt="heart" class="heart">
+                            <p id="likesCount3">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

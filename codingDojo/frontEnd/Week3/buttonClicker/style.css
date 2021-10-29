@@ -1,0 +1,75 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: cursive;
+    /*border: red 1px solid;*/
+}
+
+body {
+    max-width: 700px;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: grey;
+    padding: 10px;
+}
+
+input {
+    width: 50%;
+}
+
+button {
+    padding: 5px 15px;
+    margin: 5px;
+    background-color: orange;
+    box-shadow: black 3px 3px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.dictEntry {
+    margin-top: 15px;
+    display: flex;
+    border: black solid 3px;
+    align-items: center;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+.dictEntryHeader {
+    text-align: center;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.dictEntry > p {
+    flex: 2;
+}
+
+#loginButt {
+    background-color: lightseagreen;
+}
+
+#addDefButt {
+    background-color: olivedrab;
+}
+
+#leftModule {
+    flex: 3;
+}
+
+#rightModule {
+    flex: 1;
+    height: fit-content;
+    padding: 15px;
+    text-align: center;
+    border: black solid 3px;
+    margin: 15px;
+}

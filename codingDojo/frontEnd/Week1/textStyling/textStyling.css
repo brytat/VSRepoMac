@@ -1,0 +1,22 @@
+* {
+    font-family:Arial, Helvetica, sans-serif;
+}
+header {
+    background-color: black;
+    color: white;
+}
+header span:last-child {
+    color: cyan;
+}
+main {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rebeccapurple;
+    color: white;
+    text-align: center;
+    font-style: italic;
+}
+footer {
+    background-color:lightskyblue;
+    text-align: right;
+    text-decoration: underline;
+}

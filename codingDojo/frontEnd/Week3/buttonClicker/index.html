@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Dojonary</title>
+</head>
+<body>
+    <header>
+        <h1>Dojonary</h1>
+        <input type="text" name="search" placeholder="Search">
+        <button onclick="logInOut(this)" id="loginButt">Login</button>
+    </header>
+    <main>
+        <div id="leftModule">
+            <div class="dictEntry">
+                <div class="dictEntryHeader">
+                    <h2>ninja</h2>
+                    <h3>noun</h3>
+                    <p>Plural: <i>ninjas</i></p>
+                    <button onclick="flike(this)">0 likes</button>
+                </div>
+                <p>
+                    A Practitioner skilled in the <a href="#">Japanese</a> art of <a href="#">ninjutsu</a>
+                </p>
+            </div>
+            <div class="dictEntry">
+                <div class="dictEntryHeader">
+                    <h2>ninja</h2>
+                    <h3>noun</h3>
+                    <p>Plural: <i>ninjas</i></p>
+                    <button onclick="flike(this)">0 likes</button>                
+                </div>
+                <p>
+                    A <a href="#">programer</a> who breaks down problems with <a href="#">zen</a>-like focus
+                </p>
+            </div>
+        </div>
+        <div id="rightModule">
+            <h3>Dojonary is defined by YOU</h3>
+            <button onclick="fhide(this)" id="addDefButt">Add Definition</button>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
