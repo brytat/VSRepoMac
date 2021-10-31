@@ -7,9 +7,9 @@ def index():
     print(users)
     return render_template("frontpage/index.html", all_users = users)
 
-@app.route('/user/<string:username>/<int:num>')
-def hello(user, num):
-    return render_template('userPage/index.html', userhtml=user, numhtml=num)
+@app.route('/user/<string:username>')
+def hello(username):
+    return render_template('userPage/index.html', userhtml=username)
 
 if __name__ == "__main__":
     app.run(debug=True)
