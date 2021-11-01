@@ -2,6 +2,8 @@ from flask import Flask, render_template
 
 app = Flask(__name__)    # Create a new instance of the Flask class called "app"
 
+app.secret_key = "keep it secret, keep it safe"
+
 @app.route('/users')
 def render_users():
     user_info = [

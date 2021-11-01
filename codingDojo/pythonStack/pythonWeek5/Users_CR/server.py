@@ -1,26 +1,54 @@
 from flask import Flask, redirect, render_template, request
 # import the class from users.py
 from user import User
+
 app = Flask(__name__)
-@app.route("/users")
+
+@app.route('/')
 def index():
-    # call the get all classmethod to get all friends
+    return redirect('/users')
+
+@app.route("/users")
+def users():
     users = User.get_all()
     print(users)
-    return render_template("read.html", all_users = users)
+    return render_template("read(all).html", all_users = users)
             
-@app.route("/users/new")
-def render_create_new():
+@app.route("/user/new")
+def new():
     return render_template("create.html")
 
-@app.route("/users/process", methods=['POST'])
+@app.route("/user/process", methods=['POST'])
 def process_form():
-    data = {
-        'first_name': request.form['first_name'],
-        'last_name': request.form['last_name'],
-        'email': request.form['email']
+    User.save(request.form)
+    return redirect('/users')
+
+@app.route('/user/edit/<int:id>')
+def render_edit(id):
+    data ={
+        "id":id
     }
-    User.save(data)
+    print(id)
+    return render_template("edituser.html", one_user = User.get_one(data))
+
+@app.route('/user/show/<int:id>')
+def show(id):
+    data ={ 
+        "id":id
+    }
+    return render_template("read(one).html", user = User.get_one(data))
+
+@app.route('/user/update',methods=['POST'])
+def update():
+    User.update(request.form)
+    return redirect('/users')
+
+@app.route('/user/destroy/<int:id>')
+def destroy(id):
+    data ={
+        'id':id
+    }
+    User.destroy(data)
     return redirect('/users')
 
 if __name__ == "__main__":
