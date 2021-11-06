@@ -1,7 +1,5 @@
 from flask import render_template, request, redirect
-
 from flask_app import app
-
 from flask_app.models.user import User
 
 @app.route('/')
@@ -20,6 +18,14 @@ def signup_form():
 
 @app.route('/create', methods=['POST'])
 def create_user():
-    if not User.validate_burger(request.form):
-        return redirect('/')
-    User.save(request.form)
+    if not User.validate_user(request.form):
+        return redirect('/signup')
+    data = {
+        "name":request.form['name'],
+        "username":request.form['username'],
+        "email":request.form['email'],
+        "location":request.form['location'],
+        "age":request.form['age']
+    }
+    User.save(data)
+    return redirect('/')

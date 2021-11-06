@@ -41,10 +41,9 @@ h3 {
 
 .like {
     display: inline-flex;
-    align-items: center;
 }
 
-.like > img {
+.heart {
     height: 25px;
 }
 

@@ -11,6 +11,12 @@ class User:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
+
+    @classmethod
+    def save(cls, data):
+        query = "INSERT INTO users (name,username,email,location,age) VALUES (%(name)s,%(username)s,%(email)s,%(location)s,%(age)s)"
+        return connectToMySQL('rezoforge_db').query_db(query,data)
+
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM users;"
