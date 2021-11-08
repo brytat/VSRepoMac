@@ -23,9 +23,9 @@
         </tr>
     {% for user in all_users %}
         <tr>
-            <td>{{ user['name'] }}</td>
+            <td>{{ user['name_first'] }} {{ user['name_last'] }}</td>
             <td><a href="/user/{{ user['username'] }}">{{ user['username'] }}</a></td>
-            <td>{{ user['location'] }}</td>
+            <td>{{ user['location_city'] }}, {{ user['location_state'] }}</td>
             <td>{{ user['age'] }}</td>
             <td>{{ user['created_at'] }}</td>
         </tr>

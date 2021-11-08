@@ -21,10 +21,12 @@ def create_user():
     if not User.validate_user(request.form):
         return redirect('/signup')
     data = {
-        "name":request.form['name'],
+        "name_first":request.form['name_first'],
+        "name_last":request.form['name_last'],
         "username":request.form['username'],
         "email":request.form['email'],
-        "location":request.form['location'],
+        "location_city":request.form['location_city'],
+        "location_state":request.form['location_state'],
         "age":request.form['age']
     }
     User.save(data)
