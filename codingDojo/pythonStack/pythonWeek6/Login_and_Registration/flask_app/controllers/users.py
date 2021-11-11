@@ -20,9 +20,7 @@ def register_user():
         "email":request.form['email'],
         "password": bcrypt.generate_password_hash(request.form['password']),
     }
-    id = User.create_user(data)
-    session['user_id'] = id
-
+    session['user_id'] = User.create_user(data)
     return redirect('/dashboard')
 
 @app.route('/login', methods=['POST'])
@@ -42,10 +40,9 @@ def user_page():
         return redirect('/')
     data = {
         "id": session['user_id'],
-        #"password": bcrypt.generate_password_hash(request.form['password']),
     }
     this_user = User.get_one(data)
-    return render_template('userPage/index.html', userhtml=this_user)
+    return render_template('userPage/index.html', user=this_user)
 
 @app.route("/logout")
 def log_out():

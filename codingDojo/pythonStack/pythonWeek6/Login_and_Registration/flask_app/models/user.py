@@ -20,7 +20,7 @@ class User:
 
     @classmethod
     def create_user(cls, data):
-        query = "INSERT INTO users (first_name, last_name, email, passsword) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
+        query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
         return connectToMySQL(cls.db_name).query_db(query, data)
 
     @classmethod
@@ -34,7 +34,7 @@ class User:
         
     @classmethod
     def get_one(cls, data):
-        query = "SELECT * FROM users WHERE email = %(email)s;"
+        query = "SELECT * FROM users WHERE id = %(id)s;"
         user_from_db = connectToMySQL(cls.db_name).query_db(query, data)
         if len(user_from_db) < 1:
             return False
