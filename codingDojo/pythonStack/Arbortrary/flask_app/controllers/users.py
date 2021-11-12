@@ -27,6 +27,7 @@ def register_user():
         "email":request.form['email'],
         "password": bcrypt.generate_password_hash(request.form['password']),
     }
+    User.create_user(data)
     session['user_id'] = User.get_one_by_email(data).id
     print(session['user_id'])
     return redirect('/dashboard')
@@ -44,7 +45,7 @@ def process_login():
     print(session['user_id'])
     return redirect('/dashboard')
 
-# #render user page
+#render user page
 @app.route('/dashboard')
 def user_page():
     if "user_id" not in session:
@@ -55,7 +56,7 @@ def user_page():
     user = User.get_one(data)
     all_trees= Tree.get_all()
     print(all_trees)
-    return render_template('dashboard/index.html', user=user, all_trees=all_trees)
+    return render_template('dashboard/index.html', user=user, trees=all_trees)
 
 #end session
 @app.route("/logout")

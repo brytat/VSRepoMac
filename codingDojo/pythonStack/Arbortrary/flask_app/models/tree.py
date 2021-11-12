@@ -20,8 +20,8 @@ class Tree:
         query = "SELECT * FROM trees JOIN users ON trees.user_id = users.id;"
         results = connectToMySQL(cls.db_name).query_db(query)
         trees = []
-        for tree in results:
-            trees.append( cls(tree) )
+        for row in results:
+            trees.append(cls(row))
         return trees
 
     @classmethod
@@ -46,36 +46,36 @@ class Tree:
             trees.append( cls(row) )
         return trees
     
-    @classmethod
-    def all_trees_with_user(cls):
-        query = "SELECT * FROM trees JOIN users ON trees.user_id = users.id;"
-        trees_from_db = connectToMySQL(cls.db_name).query_db(query)
-        print(trees_from_db)
-        all_trees_instances = []
-        for row_in_db in trees_from_db:
-            tree_data = {
-                'id': row_in_db["trees.id"],
-                'species': row_in_db["species"],
-                'location': row_in_db["location"],
-                'reason': row_in_db["reason"],
-                'date_planted': row_in_db["date_planted"],
-                'created_at': row_in_db["trees.created_at"],
-                'updared_at': row_in_db["trees.updated_at"],
-            }
-            user_data = {
-                "id": row_in_db['id'],
-                "first_name": row_in_db['first_name'],
-                "last_name": row_in_db['last_name'],
-                "email": row_in_db['email'],
-                "password": row_in_db['password'],
-                'created_at': row_in_db['first_name'],
-                'updated_at': row_in_db['first_name']
-            }
-            tree_instance = cls(tree_data)
-            user_instance = user.User(user_data)
-            tree_instance.user = user_instance
-            all_trees_instances.append(tree_instance)
-        return all_trees_instances
+    # @classmethod
+    # def all_trees_with_user(cls):
+    #     query = "SELECT * FROM trees JOIN users ON trees.user_id = users.id;"
+    #     trees_from_db = connectToMySQL(cls.db_name).query_db(query)
+    #     print(trees_from_db)
+    #     all_trees_instances = []
+    #     for row_in_db in trees_from_db:
+    #         tree_data = {
+    #             'id': row_in_db["trees.id"],
+    #             'species': row_in_db["species"],
+    #             'location': row_in_db["location"],
+    #             'reason': row_in_db["reason"],
+    #             'date_planted': row_in_db["date_planted"],
+    #             'created_at': row_in_db["trees.created_at"],
+    #             'updared_at': row_in_db["trees.updated_at"],
+    #         }
+    #         user_data = {
+    #             "id": row_in_db['id'],
+    #             "first_name": row_in_db['first_name'],
+    #             "last_name": row_in_db['last_name'],
+    #             "email": row_in_db['email'],
+    #             "password": row_in_db['password'],
+    #             'created_at': row_in_db['first_name'],
+    #             'updated_at': row_in_db['first_name']
+    #         }
+    #         tree_instance = cls(tree_data)
+    #         user_instance = user.User(user_data)
+    #         tree_instance.user = user_instance
+    #         all_trees_instances.append(tree_instance)
+    #     return all_trees_instances
 
     @classmethod
     def edit_tree(cls,data):

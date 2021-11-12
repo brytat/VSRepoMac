@@ -27,14 +27,14 @@ class User:
         return connectToMySQL(cls.db_name).query_db(query, data)
 
     #put all users in a list
-    @classmethod
-    def get_all(cls):
-        query = "SELECT * FROM users;"
-        results = connectToMySQL(cls.db_name).query_db(query)
-        users = []
-        for row in results:
-            users.append( cls(row))
-        return users
+    # @classmethod
+    # def get_all(cls):
+    #     query = "SELECT * FROM users;"
+    #     results = connectToMySQL(cls.db_name).query_db(query)
+    #     users = []
+    #     for row in results:
+    #         users.append( cls(row))
+    #     return users
     
     #get data on one instance of a user
     @classmethod
