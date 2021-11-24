@@ -2,7 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_app.models import user
 
-class Tree:
+class Army:
     db_name = "rezoforge_db"
     
     def __init__(self, db_data):
@@ -19,10 +19,10 @@ class Tree:
     def get_all(cls):
         query = "SELECT * FROM armies JOIN users ON armies.user_id = users.id;"
         results = connectToMySQL(cls.db_name).query_db(query)
-        trees = []
+        armies = []
         for row in results:
-            trees.append(cls(row))
-        return trees
+            armies.append(cls(row))
+        return armies
 
     @classmethod
     def get_one(cls, data):
@@ -57,8 +57,8 @@ class Tree:
         return armies
     
     # @classmethod
-    # def all_trees_with_user(cls):
-    #     query = "SELECT * FROM trees JOIN users ON trees.user_id = users.id;"
+    # def all_armies_with_user(cls):
+    #     query = "SELECT * FROM armies JOIN users ON armies.user_id = users.id;"
     #     trees_from_db = connectToMySQL(cls.db_name).query_db(query)
     #     print(trees_from_db)
     #     all_trees_instances = []
@@ -90,7 +90,7 @@ class Tree:
     @classmethod
     def edit_army(cls,data):
         pass
-        query = "UPDATE trees SET species=%(species)s, location=%(location)s, reason=%(reason)s, date_planted=%(date_planted)s, updated_at=NOW() WHERE id = %(id)s;"
+        query = "UPDATE armies SET faction=%(faction)s, points_total=%(points_total)s, name=%(name)s, comp_level=%(comp_level)s, updated_at=NOW() WHERE id = %(id)s;"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
@@ -101,7 +101,7 @@ class Tree:
     @staticmethod
     def validate_army(army):
         is_valid = True
-        if len(army['species']) < 5:
+        if len(army['faction']) < 5:
             flash("Species must be at least 5 characters.")
             is_valid = False
         if len(army['location']) < 2:
