@@ -11,6 +11,7 @@ def new_army():
 #render Edit Army Page
 @app.route('/edit/<int:id>')
 def edit_army_page(id):
+    #validate user is in session
     if "user_id" not in session:
         return redirect('/')
     data1 = {
@@ -58,6 +59,7 @@ def create_new_tree():
     Army.create_army(data)
     return redirect('/dashboard')
 
+#display one army
 @app.route('/show/<int:id>')
 def render_show(id):
     print(session['user_id'])
@@ -71,6 +73,7 @@ def render_show(id):
     army = Army.get_one(data2)
     return render_template('show_army.html', user=user, army=army)
 
+#show all armies from users account
 @app.route("/user/account")
 def render_user_trees():
     if "user_id" not in session:
