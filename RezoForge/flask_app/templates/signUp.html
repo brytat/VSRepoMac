@@ -71,7 +71,7 @@
                     <label for='location_state'>State:</label>
                     <select class='col' name='location_state'>
                         {% for row in location_states %}
-                            <option value="{{ row['id'] }}">{{row.state_name}}</option>
+                            <option value="{{ row['id'] }}">{{ row['state_name'] }}</option>
                         {% endfor %}
                         <!-- <option value="1">Alabama</option>
                         <option value="2">Alaska</option>

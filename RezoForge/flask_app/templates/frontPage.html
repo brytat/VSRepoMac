@@ -22,10 +22,10 @@
         </tr>
     {% for row in all_users %}
         <tr>
-            <td>{{ row.name_first }} {{ row.name_last }}</td>
-            <td><a href="/user/{{ row.username }}">{{ row.username }}</a></td>
-            <td>{{ row.city_name }}, {{ row.state_name }}</td>
-            <td>{{ row.created_at }}</td>
+            <td>{{ row['name_first'] }} {{ row['name_last'] }}</td>
+            <td><a href="/user/{{ row['username'] }}">{{ row['username'] }}</a></td>
+            <td>{{ row['city_name'] }}, {{ row['state_name'] }}</td>
+            <td>{{ row[created_at] }}</td>
         </tr>
     {% endfor %}  
     </table>

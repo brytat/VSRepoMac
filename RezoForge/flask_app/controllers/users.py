@@ -43,7 +43,7 @@ def create_user():
 @app.route('/login', methods=['POST'])
 def process_login():
     data = {
-        'email':request.form['email'],
+        'username':request.form['username'],
     }
     acceptable_id = User.validate_login(request.form, data)
     if acceptable_id == False:

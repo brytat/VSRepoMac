@@ -3,7 +3,7 @@ class MySQLConnection:
     def __init__(self, db):
         connection = pymysql.connect(host = 'localhost',
                                     user = 'root', 
-                                    password = 'Slaanesh1!',
+                                    password = 'root,
                                     #this is not my password!!!!!
                                     db = db,
                                     charset = 'utf8mb4',
