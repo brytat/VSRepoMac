@@ -1,14 +1,15 @@
 from flask import render_template, request, redirect, session
+
 from flask_app import app
 from flask_app.models.user import User
-from flask_app_bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
-    users = User.get_all()
+    users = User.get_all_users()
     print(users)
-    return render_template("frontpage.html", all_users = users)
+    return render_template("frontPage.html", all_users = users)
 
 @app.route('/user/<string:username>')
 def hello(username):
@@ -16,7 +17,8 @@ def hello(username):
 
 @app.route('/signup')
 def signup_form():
-    return render_template('signUp.html')
+    form_info_states = User.get_info_states()
+    return render_template('signUp.html', location_states=form_info_states)
 
 @app.route('/create', methods=['POST'])
 def create_user():
@@ -25,16 +27,16 @@ def create_user():
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
     print(pw_hash)
     data = {
+        "username":request.form['username'],
         "name_first":request.form['name_first'],
         "name_last":request.form['name_last'],
-        "username":request.form['username'],
         "email":request.form['email'],
+        "age":request.form['age'],
         "location_city":request.form['location_city'],
         "location_state":request.form['location_state'],
-        "age":request.form['age'],
         "password":pw_hash
     }
-    user_id = User.save(data)
+    user_id = User.save_user_to_db(data)
     session['user_id'] = user_id
     return redirect('/')
 

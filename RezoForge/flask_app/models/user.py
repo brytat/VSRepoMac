@@ -1,6 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.+_-]+\.[a-zA-Z]+$')
 from flask_app import app
@@ -10,34 +9,41 @@ bcrypt = Bcrypt(app)
 class User:
     db_name = "rezoforge_db"
 
-    def __init__(self , data):
+    def __init__(self, data):
         self.id = data['id']
+        #!!!getting a keyerror here!!!
+        self.username = data['username']
         self.name_first = data['name_first']
         self.name_last = data['name_last']
-        self.username = data['username']
         self.email = data['email']
-        self.location_city = data['location_city']
-        self.location_state = data['location_state']
+        self.location_city_id = data['location_city']
+        #dont need this will most likely remove
+        #self.location_state = data['location_state']
         self.age = data['age']
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
+#This needs work. Need to validate that there are no duplicate cities entering in DB. Also need to add city.id to user.loction_city_id
     @classmethod
-    def save(cls, data):
-        query = "INSERT INTO users (name_first,name_last,username,email,location_city,location_state,age,password) VALUES (%(name_first)s,%(name_last)s,%(username)s,%(email)s,%(location_city)s,%(location_state)s,%(age)s,%(password)s);"
+    def save_user_to_db(cls, data):
+        query = "INSERT INTO users (username, name_first,name_last,email,age,password) VALUES (%(username)s,%(name_first)s,%(name_last)s,%(email)s,%(age)s,%(password)s); INSERT INTO location_cities (city_name, location_state_id) VALUES (%(location_city)s,%(location_state)s;"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
-    #search function not complete, need to define paramenter and parameter_argument
-    # @classmethod
-    # def search(cls, data):
-    #     query = "SELECT * FROM users WHERE %(parameter)s = %(parameter_argument)s;"
-    #     data = { 'parameter' : request.form['parameter_argument'] }
-    #     result = mysql.query_db(query, data)
+    #search function needs to be created
 
     @classmethod
-    def get_all(cls):
-        query = "SELECT * FROM users;"
+    def get_info_states(cls):
+        query = "SELECT * FROM location_states;"
+        results = connectToMySQL(cls.db_name).query_db(query)
+        states = []
+        for state in results:
+            states.append( cls(state) )
+        return states
+
+    @classmethod
+    def get_all_users(cls):
+        query = "SELECT * FROM users LEFT JOIN location_cities ON users.location_city_id = location_cities.id LEFT JOIN location_states ON location_cities.location_state_id = location_states.id ORDER BY users.name_first;"
         results = connectToMySQL(cls.db_name).query_db(query)
         users = []
         for user in results:
@@ -53,6 +59,7 @@ class User:
         if len(user['name_last']) < 3:
             flash("Name must be at least 3 characters.")
             is_valid = False
+        #NEEDS WORK needs to validate that username is unique
         if len(user['username']) < 3:
             flash("Username must be at least 3 characters.")
             is_valid = False
@@ -62,11 +69,9 @@ class User:
         if len(user['location_city']) < 3:
             flash("City must be at least 3 characters")
             is_valid = False
-        if len(user['location_state']) == 0:
-            flash("Please select a state.")
-            is_valid = False
-        # if int(user['age']) < 13:
-        #     flash("Must be 13 to join")
+        #THIS NEEDS WORK need to make this a not null validation
+        # if len(user['location_state']) == 0:
+        #     flash("Please select a state.")
         #     is_valid = False
         if user['password'] != user['confirm_password']:
             flash("Passwords do not match.")
@@ -79,7 +84,7 @@ class User:
     @staticmethod
     def validate_login(form_data, data_dictionary):
         is_valid = True
-        query = "SELECT * FROM users WHERE email = %(email)s;"
+        query = "SELECT * FROM users WHERE username = %(username)s;"
         list_of_users = connectToMySQL(User.db_name).query_db(query, data_dictionary)
         if len(list_of_users) < 1:
             is_valid = False
