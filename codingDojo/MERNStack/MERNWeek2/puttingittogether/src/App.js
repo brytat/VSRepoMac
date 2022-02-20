@@ -3,28 +3,16 @@ import Person from './components/Person';
 
 const peopleArr = [
   {
-    firstName: "Joe",
-    lastName: "Smith",
-    age: 28,
-    hairColor: "blonde",
-  },
-  {
-    firstName: "Matilda",
-    lastName: "Jones",
-    age: 33,
-    hairColor: "brown",
-  },
-  {
     firstName: "Jane",
-    lastName: "Johnson",
-    age: 34,
-    hairColor: "blonde",
+    lastName: "Doe",
+    age: 45,
+    hairColor: "black",
   },
   {
-    firstName: "Hal",
-    lastName: "Moore",
-    age: 90,
-    hairColor: "grey",
+    firstName: "John",
+    lastName: "Doe",
+    age: 88,
+    hairColor: "brown",
   },
 ];
 
