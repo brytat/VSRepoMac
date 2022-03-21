@@ -1,10 +1,18 @@
-import React from 'react';
-import ProductForm from './components/ProductForm';
+import "./App.css";
+import Main from "./view/Main";
+import DisplayOne from "./components/DisplayOne";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 function App() {
   return (
-    <div className="App">
-      <ProductForm path="/" />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Main/>} />
+          <Route path="/product/:id" element={<DisplayOne/>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

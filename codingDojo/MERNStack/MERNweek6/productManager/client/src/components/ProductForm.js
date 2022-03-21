@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const ProductForm= () => {
+const ProductForm = (props) => {
+
+    const { productList, setProductList } = props;
 
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
@@ -10,68 +12,70 @@ const ProductForm= () => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        axios.post("http://localhost:8000/api/products",{
-            title,
-            price,
-            description
-        })
-        .then((res)=>{
-            console.log(res);
-            console.log(res.data);
-            setTitle("");
-            setPrice("");
-            setDescription("");
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
-    }
+        axios
+            .post("http://localhost:8000/api/products", {
+                title,
+                price,
+                description,
+            })
+            .then((res) => {
+                console.log(res);
+                console.log(res.data);
+                setProductList([...productList, res.data]);
+                setTitle("");
+                setPrice("");
+                setDescription("");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     return (
-        <div class="col">
-            <h1>
-                Product Manager
-            </h1>
+        <div>
+            <header>Product Manager </header>
+
             <form onSubmit={submitHandler}>
-                <div class="row">
-                    <label class='col' for='title'>Title:</label>
+                <div className="form-fields">
+                    <label>Title:</label>
                     <input
-                        onChange={(e) => setTitle(e.Target.value)}
-                        class='col'
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
                         type="text"
-                        id="title"
-                        name='title'/>
+                        name='title'
+                    />
                 </div>
 
                 <br />
 
-                <div class="row">
-                    <label class='col' for='price'>Price:</label>
+                <div className="form-fields">
+                    <label>Price:</label>
                     <input
-                        onChange={(e) => setPrice(e.Target.value)}
-                        class='col'
-                        type="text"
-                        id="price"
-                        name='price' />
+                        onChange={(e) => setPrice(e.target.value)}
+                        value={price}
+                        type="number"
+                        name='price'
+                    />
                 </div>
 
                 <br />
 
-                <div class="row">
-                    <label class='col' for='description'>Description:</label>
+                <div className="form-fields">
+                    <label>Description:</label>
                     <input
-                        onChange={(e) => setDescription(e.Target.value)}
-                        class='col'
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
                         type="text"
-                        id="description"
-                        name='description' />
+                        name='description'
+                    />
                 </div>
 
                 <br />
-
-                <input type='submit' value="Create" class="btn btn-warning" />
+                
+                <input type='submit' value="Create" className="submit-input" />
             </form>
         </div>
-    )
-}
+    );
+};
+
 export default ProductForm;
