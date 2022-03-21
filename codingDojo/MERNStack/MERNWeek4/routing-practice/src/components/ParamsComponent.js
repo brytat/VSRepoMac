@@ -18,7 +18,11 @@ const ParamsComponent = (props)=>{
                     This is a word: {word}
                 </p>
                 :
-                <p>
+                <p style={
+                    color? 
+                    {color: color, backgroundColor: bgCol}
+                    :null
+                }>
                     This is a number: {word}
                 </p>
             }
