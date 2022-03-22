@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -9,12 +9,13 @@ const DisplayAll = (props) => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/products")
             .then((res) => {
+                console.log(res);
                 console.log(res.data);
                 setProductList(res.data);
                 
             })
             .catch((err) => console.log(err));
-    }, []);
+    }, [])
 
     return (
         <div>

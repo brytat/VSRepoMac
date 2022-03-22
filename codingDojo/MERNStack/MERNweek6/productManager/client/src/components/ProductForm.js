@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const ProductForm = (props) => {
@@ -33,7 +33,7 @@ const ProductForm = (props) => {
 
     return (
         <div>
-            <header>Product Manager </header>
+            <h1>Product Manager </h1>
 
             <form onSubmit={submitHandler}>
                 <div className="form-fields">
