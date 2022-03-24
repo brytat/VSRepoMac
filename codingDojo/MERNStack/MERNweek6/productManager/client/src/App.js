@@ -2,6 +2,7 @@ import "./App.css";
 import ProductForm from "./components/ProductForm";
 import Main from "./view/Main";
 import DisplayOne from "./components/DisplayOne";
+import Update from "./components/Update";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           <Route path= "/" element={<ProductForm/>} />
           <Route path="/product" element={<Main/>} />
           <Route path="/product/:id" element={<DisplayOne/>} />
+          <Route path="/product/edit/:id" element={<Update/>} />
         </Routes>
       </div>
     </BrowserRouter>

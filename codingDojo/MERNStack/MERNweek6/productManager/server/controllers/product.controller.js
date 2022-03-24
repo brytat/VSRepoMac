@@ -1,4 +1,4 @@
-const Product = require("../models/product.model.js");
+const Product = require("../models/product.model");
 
 module.exports = {
     getAllProducts: (req, res) => {
@@ -10,6 +10,15 @@ module.exports = {
             .catch((err) => console.log(err));
     },
 
+    createProduct: (req, res) => {
+        Product.create(req.body)
+            .then((newProduct) => {
+                console.log(newProduct);
+                res.json(newProduct);
+            })
+            .catch(err => res.json(err));
+    },
+
     getOneProduct: (req, res) => {
         Product.findOne({ _id: req.params.id })
             .then((oneProduct) => {
@@ -19,12 +28,21 @@ module.exports = {
             .catch((err) => console.log(err));
     },
 
-    createProduct: (req, res) => {
-        Product.create(req.body)
-            .then((newProduct) => {
-                console.log(newProduct);
-                res.json(newProduct);
+    updateProduct: (req, res) => {
+        Product.findOneAndUpdate({ _id: req.params.id }, req.body, {new:true})
+            .then((updatedPerson) => {
+                console.log(updatedPerson);
+                res.json(updatedPerson);
             })
-            .catch(err => res.json(err));
+            .catch(err => res.json(err))
+    },
+
+    deleteProduct: (req, res) => {
+        Product.deleteOne({ _id: req.params.id })
+            .then((deleteConfirmation) => {
+                console.log(deleteConfirmation);
+                res.json(deleteConfirmation);
+            })
+            .catch(err => res.json(err))
     }
 };
