@@ -1,6 +1,6 @@
 import "./App.css";
 import ProductForm from "./components/ProductForm";
-import Main from "./views/Main";
+import Main from "./view/Main";
 import DisplayOne from "./components/DisplayOne";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
