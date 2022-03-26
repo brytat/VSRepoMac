@@ -2,7 +2,7 @@ import "./App.css";
 import ProductForm from "./components/ProductForm";
 import Main from "./view/Main";
 import DisplayOne from "./components/DisplayOne";
-import Update from "./components/Update";
+import Update from "./view/Update";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {

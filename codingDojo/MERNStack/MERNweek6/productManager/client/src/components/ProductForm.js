@@ -1,40 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const ProductForm = (props) => {
-
-    const { productList, setProductList } = props;
-
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-
+    const { initialTitle, initialPrice, initialDescription, onSubmitProp } = props;
+    const [title, setTitle] = useState(initialTitle);
+    const [price, setPrice] = useState(initialPrice);
+    const [description, setDescription] = useState(initialDescription);
     const submitHandler = (e) => {
         e.preventDefault();
-
-        axios
-            .post("http://localhost:8000/api/products", {
-                title,
-                price,
-                description,
-            })
-            .then((res) => {
-                console.log(res);
-                console.log(res.data);
-                setProductList([...productList, res.data]);
-                setTitle("");
-                setPrice("");
-                setDescription("");
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
+        onSubmitProp({ title, price, description });
+    }
 
     return (
         <div>
-            <h1>Product Manager </h1>
-
             <form onSubmit={submitHandler}>
                 <div className="form-fields">
                     <label>Title:</label>
@@ -63,16 +40,16 @@ const ProductForm = (props) => {
                 <div className="form-fields">
                     <label>Description:</label>
                     <input
-                        onChange={(e) => setDescription(e.target.value)}
-                        value={description}
                         type="text"
                         name='description'
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
 
                 <br />
                 
-                <input type='submit' value="Create" className="submit-input" />
+                <input type='submit' value="Submit" className="submit-input" />
             </form>
         </div>
     );
