@@ -13,6 +13,11 @@ const ProductForm = (props) => {
     return (
         <div>
             <form onSubmit={submitHandler}>
+            {authorNotFoundError ? (
+                <h2>
+                {authorNotFoundError} <Link to="/new">Click here to add author</Link>
+                </h2>
+            ) : null}
                 <div className="form-fields">
                     <label>Title:</label>
                     <input

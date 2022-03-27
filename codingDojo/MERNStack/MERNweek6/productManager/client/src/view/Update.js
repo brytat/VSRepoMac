@@ -11,9 +11,8 @@ const Update = (props) => {
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/products/${id}`, )
+        axios.get(`http://localhost:8000/api/products/${id}`)
         .then((res) => {
-            console.log(res);
             console.log(res.data);
             setProduct(res.data);
             setLoaded(true)
@@ -21,7 +20,6 @@ const Update = (props) => {
     }, [])
 
     const updateProduct = productParam => {
-
         axios.put(`http://localhost:8000/api/products/${id}`, productParam)
         .then((res) => {
             console.log(res);
@@ -38,9 +36,9 @@ const Update = (props) => {
             <>
                 <ProductForm
                     onSubmitProp={updateProduct}
-                        initialTitle= {product.title}
-                        initialPrice={product.price}
-                        initialDescription={product.description}
+                    initialTitle= {product.title}
+                    initialPrice={product.price}
+                    initialDescription={product.description}
                 />
                 <DeleteButton productId={product._id} successCallback={() => navigate("/product")} />
             </>
