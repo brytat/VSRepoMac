@@ -1,0 +1,101 @@
+.adopt-btn {
+  background-color: red;
+  color: white;
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+  box-shadow: #282c34 3px 2px;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.border {
+  border: black solid 1px;
+  padding-inline-end: 30%;
+}
+.center{
+  display: flex;
+  justify-content: center;
+}
+
+.column {
+  margin-inline: 5%;
+}
+
+.container{
+  max-width: 900px;
+  margin-inline: 30%
+}
+
+.display-column{
+  margin-inline: 30%;
+}
+
+form {
+  border: 1px black solid;
+  display: flex;
+  margin-inline: 20%;
+  justify-content: center;
+  padding: 30px;
+  min-width: 400px;
+}
+
+.inline {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.nav-btn{
+  background-color: dodgerblue;
+  border: 2px #282c34 solid;
+  color: white;
+  padding: 3px;
+  margin-inline: 10px;
+  box-shadow: #282c34 3px 2px;
+}
+.submit-input{
+  background-color: dodgerblue;
+  color: white;
+  margin: 10px;
+  padding: 5px;
+  box-shadow: #282c34 3px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+table, th, td {
+  padding: 10px;
+  border: 1px solid;
+}
+
+.text-center{
+  text-align: center;
+}

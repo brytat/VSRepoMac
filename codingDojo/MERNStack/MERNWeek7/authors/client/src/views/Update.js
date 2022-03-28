@@ -46,7 +46,6 @@ const Update = (props) => {
                     onSubmitProp={updateAuthor}
                     initialName= {author.name}
                     errors={errors}
-                    authorNotFoundError={authorNotFoundError}
                 />
             </>
             )}
