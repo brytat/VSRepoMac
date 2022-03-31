@@ -23,24 +23,20 @@ const DisplayOneArmy = (props) => {
             <Link to={'/'}>back to home</Link>
             <div className="inline column">
                 <h3>Details about: {displayOneArmy.name}</h3>
-                <button className="adopt-btn" onClick={(e)=>{removeFromDom(displayOneArmy._id)}}>
-                    Apdopt {displayOneArmy.name}
-                </button>
             </div>
             <div className="border">
                 <div className="inline">
-                    <h5>Pet type: </h5>
-                    <p>{displayOneArmy.type}</p>
+                    <h5>Faction: </h5>
+                    <p>{displayOneArmy.faction}</p>
+                </div>
+                {/* This is a work in progress, needs to implement league functionality */}
+                <div className="inline">
+                    <h5>League Level: </h5><p>Coming Soon{displayOneArmy.league_level}</p>
                 </div>
                 <div className="inline">
-                    <h5>Description: </h5><p>{displayOneArmy.description}</p>
-                </div>
-                <div className="inline">
-                    <h5>Skills: </h5>
+                    <h5>Created: </h5>
                     <div>
-                        <p>{displayOneArmy.skill_1} </p>
-                        <p>{displayOneArmy.skill_2} </p>
-                        <p>{displayOneArmy.skill_3}</p>
+                        <p>{displayOneArmy.created_at} </p>
                     </div>
 
                 </div>
