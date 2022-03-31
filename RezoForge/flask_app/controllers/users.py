@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, session
 
 from flask_app import app
 from flask_app.models.user import User
+from flask_app.models.state import State
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -17,7 +18,7 @@ def hello(username):
 
 @app.route('/signup')
 def signup_form():
-    form_info_states = User.get_info_states()
+    form_info_states = State.get_info_states()
     return render_template('signUp.html', location_states=form_info_states)
 
 @app.route('/create', methods=['POST'])
@@ -32,8 +33,7 @@ def create_user():
         "name_last":request.form['name_last'],
         "email":request.form['email'],
         "age":request.form['age'],
-        "location_city":request.form['location_city'],
-        "location_state":request.form['location_state'],
+        "location_state_id":request.form['location_state_id'],
         "password":pw_hash
     }
     user_id = User.save_user_to_db(data)
