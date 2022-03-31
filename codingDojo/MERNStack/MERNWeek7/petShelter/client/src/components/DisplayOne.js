@@ -37,7 +37,7 @@ const DisplayOne = (props) => {
             <div className="inline column">
                 <h3>Details about: {displayOne.name}</h3>
                 <button className="adopt-btn" onClick={(e)=>{removeFromDom(displayOne._id)}}>
-                    Apdopt {displayOne.name}
+                    Adopt {displayOne.name}
                 </button>
             </div>
             <div className="border">
