@@ -16,7 +16,7 @@ class User:
         self.name_first = data['name_first']
         self.name_last = data['name_last']
         self.email = data['email']
-        self.location_city_id = data['location_city']
+        self.location_city_id = data['location_city_id']
         #dont need this will most likely remove
         #self.location_state = data['location_state']
         self.age = data['age']
@@ -27,19 +27,12 @@ class User:
 #This needs work. Need to validate that there are no duplicate cities entering in DB. Also need to add city.id to user.loction_city_id
     @classmethod
     def save_user_to_db(cls, data):
-        query = "INSERT INTO users (username, name_first,name_last,email,age,password) VALUES (%(username)s,%(name_first)s,%(name_last)s,%(email)s,%(age)s,%(password)s); INSERT INTO location_cities (city_name, location_state_id) VALUES (%(location_city)s,%(location_state)s;"
+        query = "INSERT INTO users (username, name_first,name_last,email, location_city_id,age,password) VALUES (%(username)s,%(name_first)s,%(name_last)s,%(email)s,%(location_city_id)s,%(age)s,%(password)s);"
+        #Add this to query if needed to create location cities
+        # INSERT INTO location_cities (city_name, location_state_id) VALUES (%(city_name)s,%(location_state_id)s;
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     #search function needs to be created
-
-    @classmethod
-    def get_info_states(cls):
-        query = "SELECT * FROM location_states;"
-        results = connectToMySQL(cls.db_name).query_db(query)
-        states = []
-        for state in results:
-            states.append( cls(state) )
-        return states
 
     @classmethod
     def get_all_users(cls):
@@ -53,23 +46,23 @@ class User:
     @staticmethod
     def validate_user(user):
         is_valid = True
+        #NEEDS WORK needs to validate that username is unique
+        if len(user['username']) < 3:
+            flash("Username must be at least 3 characters.")
+            is_valid = False
         if len(user['name_first']) < 3:
             flash("Name must be at least 3 characters.")
             is_valid = False
         if len(user['name_last']) < 3:
             flash("Name must be at least 3 characters.")
             is_valid = False
-        #NEEDS WORK needs to validate that username is unique
-        if len(user['username']) < 3:
-            flash("Username must be at least 3 characters.")
-            is_valid = False
         if not EMAIL_REGEX.match(user['email']):
             flash("Invalid email address.")
             is_valid = False
-        if len(user['location_city']) < 3:
-            flash("City must be at least 3 characters")
-            is_valid = False
         #THIS NEEDS WORK need to make this a not null validation
+        # if len(user['location_city_id']) < 3:
+        #     flash("City must be at least 3 characters")
+        #     is_valid = False
         # if len(user['location_state']) == 0:
         #     flash("Please select a state.")
         #     is_valid = False
