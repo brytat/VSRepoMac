@@ -37,17 +37,6 @@ def create_user():
     session['user_id'] = user_id
     return redirect('/')
 
-@app.route('/login', methods=['POST'])
-def process_login():
-    data = {
-        'username':request.form['username'],
-    }
-    acceptable_id = User.validate_login(request.form, data)
-    if acceptable_id == False:
-        return redirect('/')
-    session['user_id'] = acceptable_id
-    return redirect('/user/<string:username>')
-
 @app.route("/logout")
 def log_out():
     session.clear()

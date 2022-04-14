@@ -24,47 +24,20 @@
     </header>
     <main>
         <div id="leftPanel" class="panel">
-            <p>Hi</p>
+            <p>Hi {{ user.username }}</p>
         </div>
         <div id="centerPanel" class="panel">
             <div id="tabs">
-                <h3>Timeline</h3>
-                <h3>Armies</h3>
+                <h3><a href="/user/deck/{{ user.username }}">Decks</a></h3>
+                <h3>Hubs</h3>
             </div> 
-            <div>
-                <div>
-                    <h4>September 29, 2021</h4>
-                    <div class='like'>
-                        <img onclick="flike(1)" src="{{ url_for('static', filename='/script/script.js') }}" alt="heart" class="heart">
-                        <p id="likesCount1">0</p>                        
-                    </div>
-                    <p>This was a good game Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
-                <div>
-                    <h4>September 29, 2021</h4>
-                    <div class="like">
-                        <img onclick="flike(2)" src="{{ url_for('static', filename='/assets/heart.png') }}" alt="heart" class="heart">
-                        <p id="likesCount2">0</p>
-                    </div>
-                    <p>This was a good game Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
-                <div>
-                    <h4>September 29, 2021</h4>
-                    <div class="like">
-                        <img onclick="flike(3)" src="{{ url_for('static', filename='/assets/heart.png') }}" alt="heart" class="heart">
-                        <p id="likesCount3">0</p>
-                    </div>
-                    <p>This was a good game Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
-            </div>
         </div>
         <div id="rightPanel" class="panel">
-            <h2>{{ userhtml }}</h2> 
-            <img src="{{ url_for('static', filename='/assets/profilePic.jpg') }}" alt="Profile_Pic" id="profilePic">
+            <h2>{{ user.username }}</h2> 
+            <img src="PLACEHOLDER" alt="Profile_Pic" id="profilePic">
             
             <div>
                 <a href="#">Friends</a>
-                <a href="#">Send game request</a>
                 <a href="#">Send Friend Request</a>
                 <a href="#">Invite to event</a>
                 <a href="#">Block</a>

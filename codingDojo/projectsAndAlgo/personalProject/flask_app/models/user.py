@@ -19,6 +19,15 @@ class User:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
+    #get data on one instance of a user
+    @classmethod
+    def get_one(cls, data):
+        query = "SELECT * FROM users WHERE user_id = %(user_id)s;"
+        user_from_db = connectToMySQL(cls.db_name).query_db(query, data)
+        if len(user_from_db) < 1:
+            return False
+        return cls(user_from_db[0])
+
 #This needs work. Need to validate that there are no duplicate cities entering in DB. Also need to add city.id to user.loction_city_id
     @classmethod
     def save_user_to_db(cls, data):
@@ -73,5 +82,5 @@ class User:
             is_valid = False
             flash("Invalid login credentials.")
         if is_valid:
-            is_valid = user_instance.id
+            is_valid = user_instance.user_id
         return is_valid

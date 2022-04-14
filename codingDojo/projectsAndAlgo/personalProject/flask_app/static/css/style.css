@@ -1,0 +1,72 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    border: 1px red solid;
+}
+
+body {
+    width: 90%;
+    margin: auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 10%;
+    padding: 10px;
+    background-color: #777;
+}
+
+main {
+    display: flex;
+    margin-top: 20px;
+}
+
+button, a, img {
+    cursor: pointer;
+}
+
+
+h3 {
+    width: 100%;
+    max-width: 300px;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.panel {
+    margin: 20px;
+}
+
+.like {
+    display: inline-flex;
+}
+
+.heart {
+    height: 25px;
+}
+
+#tabs {
+    display: flex;
+    justify-content: space-around;
+}
+
+#logoutButton {
+    padding: 8px;
+    background-color: tomato;
+}
+
+#profilePic {
+    width: 220px;
+    border-radius: 50%;
+}
+
+#leftPanel, #rightPanel {
+    flex: 1;
+    background-color: silver;
+}
+
+#centerPanel {
+    flex: 4;
+}
