@@ -57,7 +57,7 @@
                     {% with messages = get_flashed_messages() %}
                         {% if messages %}
                             {% for message in messages %}
-                                <p>{{ message }}</p>
+                                <p class="flash-msg">{{ message }}</p>
                             {% endfor %}
                         {% endif %}
                     {% endwith %}
@@ -67,11 +67,18 @@
                     </div>
                     <div class='form-group'>
                         <label for='format'>Format:</label>
-                        <input type="text" name='format' placeholder="Format">
+                        <select name='format' placeholder="Format">
+                            <option value="Blitz">Blitz</option>
+                            <option value="Classic Constructed">Classic Constructed</option>
+                        </select>
                     </div>
                     <div class='form-group'>
                         <label for='deck_comp_level'>Comp Level:</label>
-                        <input type="text" name='deck_comp_level' placeholder="Competitive Level">
+                        <select name='deck_comp_level' placeholder="Competitive Level">
+                            <option value="1">Casual</option>
+                            <option value="2">Tuned</option>
+                            <option value="3">Competitive</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for='description'>Description:</label>

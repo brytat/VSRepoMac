@@ -25,15 +25,3 @@ def render_user_page(username):
     }
     user = User.get_one(data)
     return render_template('userPage.html', pageName=pageName, user=user)
-
-@app.route('/user/deck/<string:username>')
-def render_decks_page(username):
-    pageName = "User Page"
-    if "user_id" not in session:
-        return redirect('/')
-    data = {
-        "user_id": session['user_id']
-    }
-    decks = Deck.get_decks_from_one_user(data)
-    user = User.get_one(data)
-    return render_template('displayDecks.html', pageName=pageName, user=user, decks=decks)

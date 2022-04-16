@@ -17,6 +17,7 @@ class Deck:
     @classmethod
     def create_deck(cls, data):
         query = "INSERT INTO decks (deck_hero, format, deck_comp_level, description, user_id) VALUES ( %(deck_hero)s, %(format)s, %(deck_comp_level)s, %(description)s, %(user_id)s );"
+        print(query)
         return connectToMySQL(cls.db_name).query_db(query, data)
 
 
@@ -27,6 +28,7 @@ class Deck:
         deck_from_db = connectToMySQL(cls.db_name).query_db(query, data)
         if len(deck_from_db) < 1:
             return False
+        print(query)
         return cls(deck_from_db[0])
     
     @classmethod
@@ -36,14 +38,17 @@ class Deck:
         decks = []
         for row in decks_from_db:
             decks.append( cls(row) )
+        print(query)
         return decks
 
     @classmethod
     def edit_deck(cls,data):
         query = "UPDATE decks SET deck_hero=%(deck_hero)s, format=%(format)s, deck_comp_level=%(deck_comp_level)s, description=%(description)s, WHERE deck_id = %(deck_id)s;"
+        print(query)
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
     def delete_deck(cls,data):
-        query  = "DELETE FROM deckss WHERE deck_id = %(deck_id)s;"
+        query  = "DELETE FROM decks WHERE deck_id = %(deck_id)s;"
+        print(query)
         return connectToMySQL(cls.db_name).query_db(query, data)

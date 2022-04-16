@@ -3,6 +3,18 @@ from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.deck import Deck
 
+@app.route('/user/deck/<string:username>')
+def render_decks_page(username):
+    pageName = "User Page"
+    if "user_id" not in session:
+        return redirect('/')
+    data = {
+        "user_id": session['user_id']
+    }
+    decks = Deck.get_decks_from_one_user(data)
+    user = User.get_one(data)
+    return render_template('displayDecks.html', pageName=pageName, user=user, decks=decks)
+
 @app.route('/deck/create', methods=['POST'])
 def create_deck():
     if 'user_id' not in session:
@@ -17,7 +29,7 @@ def create_deck():
     }
     print(data)
     Deck.create_deck(data)
-    return redirect('/user/deck/<string:username>')
+    return redirect('/user/deck/<string:username>', username=username)
 
 @app.route('/deck/update/<int:deck_id>')
 def render_update_deck(deck_id):
@@ -25,4 +37,11 @@ def render_update_deck(deck_id):
 
 @app.route('/deck/delete/<int:deck_id>')
 def delete_deck(deck_id):
-    pass
+    if 'user_id' not in session:
+        return redirect('/')
+    username : session["username"]
+    data = {
+        'user_id': user_id
+    }
+    Deck.delete_deck(data)
+    return redirect('/user/deck/<string:username>', username=username)
