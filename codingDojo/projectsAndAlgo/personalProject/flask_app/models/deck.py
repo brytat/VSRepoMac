@@ -37,3 +37,13 @@ class Deck:
         for row in decks_from_db:
             decks.append( cls(row) )
         return decks
+
+    @classmethod
+    def edit_deck(cls,data):
+        query = "UPDATE decks SET deck_hero=%(deck_hero)s, format=%(format)s, deck_comp_level=%(deck_comp_level)s, description=%(description)s, WHERE deck_id = %(deck_id)s;"
+        return connectToMySQL(cls.db_name).query_db(query,data)
+
+    @classmethod
+    def delete_deck(cls,data):
+        query  = "DELETE FROM deckss WHERE deck_id = %(deck_id)s;"
+        return connectToMySQL(cls.db_name).query_db(query, data)

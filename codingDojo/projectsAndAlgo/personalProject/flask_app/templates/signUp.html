@@ -32,7 +32,7 @@
                 </div>
                 <div class="row">
                     <label class='col' for='password'>Password:</label>
-                    <input class='col' type="text" id='password' name='password'>
+                    <input class='col' type="password" id='password' name='password'>
                 </div>
                 <input type='submit' value="Log in" class="btn btn-warning">
             </form>
@@ -43,7 +43,7 @@
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}
-                            <p>{{ message }}</p>
+                            <p class="flash-msg">{{ message }}</p>
                         {% endfor %}
                     {% endif %}
                 {% endwith %}

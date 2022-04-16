@@ -35,6 +35,10 @@ h3 {
     justify-content: center;
 }
 
+.flash-msg{
+    color: red;
+}
+
 .panel {
     margin: 20px;
 }
