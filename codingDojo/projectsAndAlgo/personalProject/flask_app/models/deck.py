@@ -24,12 +24,11 @@ class Deck:
     #get data on one instance of a deck
     @classmethod
     def get_one(cls, data):
-        query = "SELECT * FROM decks WHERE deck_id = %(deck_id)s JOIN users ON decks.user_id = users.user_id;"
+        query = "SELECT * FROM decks JOIN users ON users.user_id = decks.user_id  WHERE deck_id = %(deck_id)s;"
         deck_from_db = connectToMySQL(cls.db_name).query_db(query, data)
-        if len(deck_from_db) < 1:
-            return False
-        print(query)
-        return cls(deck_from_db[0])
+        deck = deck_from_db
+        print(deck)
+        return deck
     
     @classmethod
     def get_decks_from_one_user(cls, data):
@@ -43,7 +42,7 @@ class Deck:
 
     @classmethod
     def edit_deck(cls,data):
-        query = "UPDATE decks SET deck_hero=%(deck_hero)s, format=%(format)s, deck_comp_level=%(deck_comp_level)s, description=%(description)s, WHERE deck_id = %(deck_id)s;"
+        query = "UPDATE decks SET hero=%(hero)s, format=%(format)s, deck_comp_level=%(deck_comp_level)s, description=%(description)s, WHERE deck_id = %(deck_id)s;"
         print(query)
         return connectToMySQL(cls.db_name).query_db(query,data)
 
