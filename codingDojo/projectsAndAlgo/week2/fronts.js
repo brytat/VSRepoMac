@@ -1,46 +1,37 @@
-class SLLNode { // Singly-linked list node class
+class SLLNode {
     constructor(val) {
-        this.value = val; // Holds value for this node
-        this.next = null; // Pointer to next node
+        this.value = val;
+        this.next = null;
     }
 }
 
-class SLL { // The singly-linked list class itself
-    constructor() { // Will start with no nodes
-        this.head = null; // Head points to first node
+class SLL {
+    constructor() {
+        this.head = null;
     }
 
-    /* All methods built into your class go here */
-
-    // Adds a node to the front
     addFront(value) {
-        var newNode = new SLLNode(value); // Create a new node containing the value passed into the method
-        newNode.next = this.head; // Connect the new node to the list
-        this.head = newNode; // Move the head of the list to this new node
-        return this.head; // OR you can say "return this"
+        var newNode = new SLLNode(value);
+        newNode.next = this.head;
+        this.head = newNode;
+        return this.head;
     }
 
-    // Remove a node from the front of the list
     removeFront() {
-        if (this.head == null) { // Edge case: If the list is empty, nothing to remove
+        if (this.head == null) {
             return this.head;
         }
-        var removedNode = this.head; // Have a variable hold the node we'll remove
-        this.head = removedNode.next; // Moves the head of the list to the 2nd node, which will become the new head when we're done
+        var removedNode = this.head;
+        this.head = removedNode.next;
         removedNode.next = null;
         return this.head;
     }
 
-    // Return the value at the front (head) of the list
     front() {
-        // Edge case: list is empty
         if (this.head == null) {
             return null;
-        } else { // List is not empty
+        } else {
             return this.head.value;
         }
-        // // Ternary operator: condition ? value_if_true : value_if_false
-        // return this.head ? this.head.value : null;
-        // // return this.head == null ? null : this.head.value;
     }
 }
