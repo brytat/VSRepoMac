@@ -30,8 +30,8 @@ def create_deck():
     Deck.create_deck(data)
     return redirect('/user/deck/<string:username>')
 
-@app.route('/deck/update/<int:deck_id>')
-def render_update_deck(deck_id):
+@app.route('/deck/edit/<int:deck_id>')
+def render_edit_deck(deck_id):
     if 'user_id' not in session:
         return redirect('/')
     pageName = "Edit Deck"
@@ -39,21 +39,23 @@ def render_update_deck(deck_id):
         'deck_id': deck_id
     }
     deck = Deck.get_one(data)
-    return render_template('editDeck.html', deck=deck, pageName=pageName)
+    deckhtml = deck[0]
+    return render_template('editDeck.html', deck=deckhtml, pageName=pageName)
 
-@app.route('/deck/update/<int:deck_id>')
-def edit_deck(deck_id):
+@app.route('/deck/update/<int:deck_id>', methods=['POST'])
+def process_update_deck(deck_id):
     if 'user_id' not in session:
         return redirect('/')
     data = {
-        'deck_id': deck_id,
-        'hero': request.form['hero'],
+        'deck_hero': request.form['deck_hero'],
         'format': request.form['format'],
         'deck_comp_level': request.form['deck_comp_level'],
-        'description': request.form['description']
+        'description': request.form['description'],
+        'deck_id': deck_id,
     }
-    Deck.edit_deck(data)
-    return redirect('/user/<string:username>')
+    print(data)
+    Deck.update_deck(data)
+    return redirect('/user/deck/<string:username>')
 
 @app.route('/deck/delete/<int:deck_id>')
 def delete_deck(deck_id):

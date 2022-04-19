@@ -41,8 +41,8 @@ class Deck:
         return decks
 
     @classmethod
-    def edit_deck(cls,data):
-        query = "UPDATE decks SET hero=%(hero)s, format=%(format)s, deck_comp_level=%(deck_comp_level)s, description=%(description)s, WHERE deck_id = %(deck_id)s;"
+    def update_deck(cls,data):
+        query = "UPDATE decks SET deck_hero=%(deck_hero)s, format=%(format)s, deck_comp_level=%(deck_comp_level)s, description=%(description)s, updated_at=NOW() WHERE deck_id = %(deck_id)s;"
         print(query)
         return connectToMySQL(cls.db_name).query_db(query,data)
 

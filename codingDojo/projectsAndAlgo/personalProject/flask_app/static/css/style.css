@@ -1,11 +1,10 @@
 * {
     margin: 0px;
     padding: 0px;
-    border: 1px red solid;
+    /* border: 1px red solid; */
 }
 
 body {
-    width: 90%;
     margin: auto;
 }
 
@@ -39,8 +38,18 @@ h3 {
     color: red;
 }
 
+.bg{
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:-1;
+    max-width: 100%;
+    height: auto;
+}
+
 .panel {
     margin: 20px;
+    border: 2px black solid;
 }
 
 .like {
