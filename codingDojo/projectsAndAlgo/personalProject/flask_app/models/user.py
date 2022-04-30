@@ -44,6 +44,17 @@ class User:
         for user in results:
             users.append( cls(user) )
         return users
+    
+    @classmethod
+    def join_hub(cls, data):
+        query = "INSERT INTO users_has_hubs (hub_id,user_id) VALUES (%(hub_id)s,%(user_id)s);"
+        return connectToMySQL(cls.db_name).query_db(query,data)
+    
+    @classmethod
+    def leave_hub(cls, data):
+        query  = "DELETE FROM users_has_hubs WHERE deck_id = %(deck_id)s;"
+        print(query)
+        return connectToMySQL(cls.db_name).query_db(query, data)
 
     @staticmethod
     def validate_user(user):
@@ -84,3 +95,4 @@ class User:
         if is_valid:
             is_valid = user_instance.user_id
         return is_valid
+    

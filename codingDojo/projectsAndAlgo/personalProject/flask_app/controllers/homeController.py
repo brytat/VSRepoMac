@@ -28,7 +28,7 @@ def create_user():
     print(pw_hash)
     data = {
         "username":request.form['username'],
-        "first_name":request.form['first_name'],
+        "first_name":request.form['first_name'],  
         "last_name":request.form['last_name'],
         "email":request.form['email'],
         "password":pw_hash
