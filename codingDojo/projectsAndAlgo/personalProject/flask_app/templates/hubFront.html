@@ -25,12 +25,14 @@
     </header>
     <main>
         <div id="leftPanel" class="panel">
-            <p>Hi {{ user.username }}</p>
+            <p>Welcome to {{ hub.hub_name }}</p>
+            <p>{{ hub.hub_location }}</p>
+            <p>{{ hub.hub_description }}</p>
         </div>
         <div id="centerPanel" class="panel p-3 container bg-dark text-white bg-opacity-75">
             <div id="tabs">
-                <h3><a href="/user/deck/{{ user.username }}">Decks</a></h3>
-                <h3>Hubs</h3>
+                <h3><a href="/hub/users/{{ hub.hub_un }}">Members</a></h3>
+                <h3>Enter the Pits!</h3>
             </div> 
             {% for post in posts %}
                 <div>
@@ -40,7 +42,7 @@
             {% endfor %}
         </div>
         <div id="rightPanel" class="panel">
-            <h2>{{ user.username }}</h2> 
+            <h2>{{ hub.hub_name }}</h2> 
             <img src="PLACEHOLDER" alt="Profile_Pic" id="profilePic">
             
             <div>
