@@ -26,7 +26,7 @@ var setCMDR = [0,0,0];
 
 function calcPullRate(allCMDR) {
     for (var i = 0; i < allCMDR.length; i++){
-        var colorCMDR = arrCMDR[i];
+        var colorCMDR = allCMDR[i];
         console.log(colorCMDR);
         //Mythic
         colorM=colorCMDR[0]*0.069;
@@ -38,3 +38,5 @@ function calcPullRate(allCMDR) {
         console.log("Rarity index for color: " + i + ", is: " + colorTot);
     }
 }
+
+calcPullRate(allCMDR)
