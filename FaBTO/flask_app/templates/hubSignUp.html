@@ -49,33 +49,37 @@
                     {% endif %}
                 {% endwith %}
                 <div class='form-group'>
-                    <label for='username'>Username:</label>
-                    <input type="text" name='username' placeholder="Username">
+                    <label for='hub_un'>Hub Username:</label>
+                    <input type="text" name='hub_un' placeholder="Username">
                 </div>
                 <div class='form-group'>
-                    <label for='first_name'>First Name:</label>
-                    <input type="text" name='first_name' placeholder="First Name">
-                </div>
-                <div class='form-group'>
-                    <label for='last_name'>Last Name:</label>
-                    <input type="text" name='last_name' placeholder="Last Name">
+                    <label for='hub_name'>Hub Name:</label>
+                    <input type="text" name='hub_name' placeholder="Name">
                 </div>
                 <div class="form-group">
-                    <label for='email'>E-mail:</label>
-                    <input type="email" name='email' placeholder="Email">                    
+                    <label for='hub_email'>E-mail:</label>
+                    <input type="email" name='hub_email' placeholder="Email">  
+                </div>
+                <div class="form-group">
+                    <label for='hub_location'>Location:</label>
+                    <input type="text" name='hub_location' placeholder="Location">
+                </div>
+                <div class="form-group">
+                    <label for='hub_description'>Description:</label>
+                    <input type="text" name='hub_descripotion' placeholder="Descripiton">
                 </div>
                 <div class="form-group">
                     <label for='password'>Password:</label>
-                    <input type='password' name='password'>                    
+                    <input type='password' name='password'>
                 </div>
                 <div class="form-group">
                     <label for='confirm_password'>Confirm Password:</label>
-                    <input type='password' name='confirm_password'>                    
+                    <input type='password' name='confirm_password'>
                 </div>
                 <input type='submit' value="Submit" class="btn btn-warning">
             </form>
             <div class="d-flex justify-content-center">
-                <a href="/hub/signup">Are you a hub?</a>
+                <a href="/signup">Are you a user?</a>
             </div>
 
         </div>

@@ -1,7 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
-    /* border: 1px red solid; */
+    border: 1px red solid;
 }
 
 body {
@@ -18,8 +18,7 @@ header {
 }
 
 main {
-    display: flex;
-    margin-top: 20px;
+    margin:auto;
 }
 
 button, a, img {
@@ -39,6 +38,7 @@ h3 {
 }
 
 .bg{
+    url(https://fabdb2.imgix.net/assets/backgrounds/background-tales-of-aria.jpg?auto=format) no-repeat top center;
     position:absolute;
     left:0px;
     top:0px;

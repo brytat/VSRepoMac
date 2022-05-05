@@ -20,6 +20,11 @@ def signup_form():
     pageName = "Sign up or sign in"
     return render_template('signUp.html', pageName = pageName)
 
+@app.route('/hub/signup')
+def signup_form_hub():
+    pageName = "Hub sign up or sign in"
+    return render_template('hubSignUp.html', pageName = pageName)
+
 @app.route('/create', methods=['POST'])
 def create_user():
     if not User.validate_user(request.form):
