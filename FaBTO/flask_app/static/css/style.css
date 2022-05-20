@@ -1,0 +1,86 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    /* border: 1px red solid; */
+}
+
+body {
+    margin: auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 10%;
+    padding: 10px;
+    background-color: #777;
+}
+
+main {
+    margin:auto;
+}
+
+button, a, img {
+    cursor: pointer;
+}
+
+
+h3 {
+    width: 100%;
+    max-width: 300px;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.flash-msg{
+    color: red;
+}
+
+.bg{
+    url(https://fabdb2.imgix.net/assets/backgrounds/background-tales-of-aria.jpg?auto=format) no-repeat top center;
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:-1;
+    height: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.panel {
+    margin: 20px;
+    border: 2px black solid;
+}
+
+.like {
+    display: inline-flex;
+}
+
+.heart {
+    height: 25px;
+}
+
+#tabs {
+    display: flex;
+    justify-content: space-around;
+}
+
+#logoutButton {
+    padding: 8px;
+    background-color: tomato;
+}
+
+#profilePic {
+    width: 220px;
+    border-radius: 50%;
+}
+
+#leftPanel, #rightPanel {
+    flex: 1;
+    background-color: silver;
+}
+
+#centerPanel {
+    flex: 4;
+}
