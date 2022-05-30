@@ -1,3 +1,4 @@
+from flask import flash
 from flask import render_template, request, redirect, session
 
 from flask_app import app
@@ -15,16 +16,6 @@ def homePage():
 # def hello(username):
 #     return render_template('userPage.html', userhtml=username)
 
-@app.route('/signup')
-def signup_form():
-    pageName = "Sign up or sign in"
-    return render_template('signUp.html', pageName = pageName)
-
-@app.route('/hub/signup')
-def signup_form_hub():
-    pageName = "Hub sign up or sign in"
-    return render_template('hubSignUp.html', pageName = pageName)
-
 @app.route('/create', methods=['POST'])
 def create_user():
     if not User.validate_user(request.form):
@@ -41,6 +32,36 @@ def create_user():
     user_id = User.save_user_to_db(data)
     session['user_id'] = user_id
     return redirect('/')
+
+@app.route('/login', methods=['POST'])
+def process_login():
+    data = {
+        'username':request.form['username'],
+    }
+    user_in_db = User.get_by_username(data)
+    # acceptable_id = User.validate_login(request.form, data)
+    if not user_in_db:
+        flash("Invalid login credentials.")
+        return redirect('/signup')
+    # if acceptable_id == False:
+    #     return redirect('/signup')
+    if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
+        # if we get False after checking the password
+        flash("Invalid Email/Password")
+        return redirect('/')
+    # if the passwords matched,
+    session['user_id'] = acceptable_id
+    return redirect('/user/<string:username>')
+
+@app.route('/signup')
+def signup_form():
+    pageName = "Sign up or sign in"
+    return render_template('signUp.html', pageName = pageName)
+
+@app.route('/hub/signup')
+def signup_form_hub():
+    pageName = "Hub sign up or sign in"
+    return render_template('hubSignUp.html', pageName = pageName)
 
 @app.route("/logout")
 def log_out():

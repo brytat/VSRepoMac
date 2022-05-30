@@ -9,7 +9,14 @@ body {
     background-image: url('/static/assets/backgroundImg.jpg');
     background-attachment: fixed;
     background-position: center;
-    background-size: auto;
+    background-size: cover;
+}
+
+.use-old-bg {
+    background-image: url('/static/assets/backgroundImgOld.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
 header {

@@ -4,17 +4,6 @@ from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.deck import Deck
 
-@app.route('/login', methods=['POST'])
-def process_login():
-    data = {
-        'username':request.form['username'],
-    }
-    acceptable_id = User.validate_login(request.form, data)
-    if acceptable_id == False:
-        return redirect('/')
-    session['user_id'] = acceptable_id
-    return redirect('/user/<string:username>')
-
 @app.route('/user/<string:username>')
 def render_user_page(username):
     pageName = "User Page"
