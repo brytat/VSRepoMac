@@ -42,15 +42,17 @@ def process_login():
     # acceptable_id = User.validate_login(request.form, data)
     if not user_in_db:
         flash("Invalid login credentials.")
+        print("user attempted to find a user not in DB")
         return redirect('/signup')
     # if acceptable_id == False:
     #     return redirect('/signup')
     if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
         # if we get False after checking the password
         flash("Invalid Email/Password")
-        return redirect('/')
+        print("User entered an incorrect password for " + user_in_db.username)
+        return redirect('/signup')
     # if the passwords matched,
-    session['user_id'] = acceptable_id
+    session['user_id'] = user_in_db.user_id
     return redirect('/user/<string:username>')
 
 @app.route('/signup')
