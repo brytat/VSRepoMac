@@ -31,7 +31,7 @@ def create_user():
     }
     user_id = User.save_user_to_db(data)
     session['user_id'] = user_id
-    return redirect('/')
+    return redirect('/signup')
 
 @app.route('/login', methods=['POST'])
 def process_login():
@@ -49,10 +49,16 @@ def process_login():
     if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
         # if we get False after checking the password
         flash("Invalid Email/Password")
+<<<<<<< HEAD
         print("User entered an incorrect password for " + user_in_db.username)
         return redirect('/signup')
     # if the passwords matched,
     session['user_id'] = user_in_db.user_id
+=======
+        return redirect('/signup')
+    # if the passwords matched,
+    # session['user_id'] = acceptable_id
+>>>>>>> 62a80f99739da9b3781a1053f5405339e6987bff
     return redirect('/user/<string:username>')
 
 @app.route('/signup')
