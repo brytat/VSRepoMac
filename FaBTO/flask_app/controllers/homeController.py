@@ -1,5 +1,5 @@
-from flask import flash
-from flask import render_template, request, redirect, session
+from flask import url_for, render_template, request, redirect, session
+from flask_app.controllers.users import render_user_page
 
 from flask_app import app
 from flask_app.models.user import User
@@ -36,22 +36,39 @@ def create_user():
 @app.route('/login', methods=['POST'])
 def process_login():
     data = {
-        'username':request.form['username'],
+        'username':request.form['username']
     }
     user_in_db = User.get_by_username(data)
-    # acceptable_id = User.validate_login(request.form, data)
+    acceptable_id = User.validate_login(request.form, data)
     if not user_in_db:
-        flash("Invalid login credentials.")
+        # flash("Invalid login credentials.")
         return redirect('/signup')
-    # if acceptable_id == False:
-    #     return redirect('/signup')
+    if acceptable_id == False:
+        return redirect('/signup')
     if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
         # if we get False after checking the password
-        flash("Invalid Email/Password")
+        # flash("Invalid Email/Password")
         return redirect('/signup')
-    # if the passwords matched,
-    # session['user_id'] = acceptable_id
-    return redirect('/user/<string:username>')
+    # if the passwords matched
+    session['user_id'] = acceptable_id
+#GETTING AN ERROR HERE File "C:\Users\Bryton\.virtualenvs\FaBTO-v3ZnsrMK\Lib\site-packages\flask\app.py", line 2091, in __call__
+# return self.wsgi_app(environ, start_response)
+# File "C:\Users\Bryton\.virtualenvs\FaBTO-v3ZnsrMK\Lib\site-packages\flask\app.py", line 2076, in wsgi_app
+# response = self.handle_exception(e)
+# File "C:\Users\Bryton\.virtualenvs\FaBTO-v3ZnsrMK\Lib\site-packages\flask\app.py", line 2073, in wsgi_app
+# response = self.full_dispatch_request()
+# File "C:\Users\Bryton\.virtualenvs\FaBTO-v3ZnsrMK\Lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+# rv = self.handle_user_exception(e)
+# File "C:\Users\Bryton\.virtualenvs\FaBTO-v3ZnsrMK\Lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+# rv = self.dispatch_request()
+# File "C:\Users\Bryton\.virtualenvs\FaBTO-v3ZnsrMK\Lib\site-packages\flask\app.py", line 1502, in dispatch_request
+# return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+# File "F:\Users\Bryton\Documents\FaBTO\flask_app\controllers\homeController.py", line 54, in process_login
+# return(url_for(render_user_page, user_id=4))
+# File "C:\Users\Bryton\.virtualenvs\FaBTO-v3ZnsrMK\Lib\site-packages\flask\helpers.py", line 286, in url_for
+# if endpoint[:1] == ".":
+# TypeError: 'function' object is not subscriptable
+    return(url_for(render_user_page))
 
 @app.route('/signup')
 def signup_form():

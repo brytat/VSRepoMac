@@ -24,6 +24,7 @@ class User:
     def get_one(cls, data):
         query = "SELECT * FROM users WHERE user_id = %(user_id)s;"
         user_from_db = connectToMySQL(cls.db_name).query_db(query, data)
+        print(user_from_db)
         if len(user_from_db) < 1:
             return False
         return cls(user_from_db[0])
@@ -87,20 +88,20 @@ class User:
             is_valid = False
         return is_valid
 
-    # @staticmethod
-    # def validate_login(form_data, data_dictionary):
-    #     is_valid = True
-    #     query = "SELECT * FROM users WHERE username = %(username)s;"
-    #     list_of_users = connectToMySQL(User.db_name).query_db(query, data_dictionary)
-    #     if len(list_of_users) < 1:
-    #         is_valid = False
-    #         flash("Invalid login credentials.")
-    #     this_user = list_of_users[0]
-    #     user_instance = User(this_user)
-    #     if is_valid and not bcrypt.check_password_hash(user_instance.password, form_data['password']):
-    #         is_valid = False
-    #         flash("Invalid login credentials.")
-    #     if is_valid:
-    #         is_valid = user_instance.user_id
-    #     return is_valid
+    @staticmethod
+    def validate_login(form_data, data_dictionary):
+        is_valid = True
+        query = "SELECT * FROM users WHERE username = %(username)s;"
+        list_of_users = connectToMySQL(User.db_name).query_db(query, data_dictionary)
+        if len(list_of_users) < 1:
+            is_valid = False
+            flash("Invalid login credentials.")
+        this_user = list_of_users[0]
+        user_instance = User(this_user)
+        if is_valid and not bcrypt.check_password_hash(user_instance.password, form_data['password']):
+            is_valid = False
+            flash("Invalid login credentials.")
+        if is_valid:
+            is_valid = user_instance.user_id
+        return is_valid
     
