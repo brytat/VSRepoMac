@@ -13,6 +13,7 @@
     <header>
         <div>
             <h1>Flesh and Blood Tournament Organizer</h1>
+            <a href="/user/{{ session.user_id }}">Home</a>
         </div>
         <form>
             <input placeholder="Search">
@@ -22,7 +23,7 @@
             <button id="logoutButton">Logout</button>
         </form>
     </header>
-    <main>
+    <main class="center">
         <div id="leftPanel" class="panel">
             <p>Hi {{ user.username }}</p>
         </div>
