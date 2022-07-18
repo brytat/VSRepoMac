@@ -93,14 +93,15 @@ class User:
         is_valid = True
         query = "SELECT * FROM users WHERE username = %(username)s;"
         list_of_users = connectToMySQL(User.db_name).query_db(query, data_dictionary)
+        print(list_of_users)
         if len(list_of_users) < 1:
             is_valid = False
-            flash("Invalid login credentials.")
+            # flash("Invalid login credentials.")
         this_user = list_of_users[0]
         user_instance = User(this_user)
         if is_valid and not bcrypt.check_password_hash(user_instance.password, form_data['password']):
             is_valid = False
-            flash("Invalid login credentials.")
+            # flash("Invalid login credentials.")
         if is_valid:
             is_valid = user_instance.user_id
         return is_valid

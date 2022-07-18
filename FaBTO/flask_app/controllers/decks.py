@@ -45,7 +45,7 @@ def process_update_deck(deck_id):
     }
     print(data)
     Deck.update_deck(data)
-    return redirect(url_for(render_decks_page, user_id=session['user_id']))
+    return redirect(url_for('render_decks_page', user_id=session['user_id']))
 
 @app.route('/deck/delete/<int:deck_id>')
 def delete_deck(deck_id):
@@ -55,4 +55,4 @@ def delete_deck(deck_id):
         'deck_id': deck_id
     }
     Deck.delete_deck(data)
-    return redirect(render_decks_page, user_id=session['user_id'])
+    return redirect(url_for('render_decks_page', user_id=session['user_id']))
