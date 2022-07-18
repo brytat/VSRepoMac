@@ -1,4 +1,5 @@
 from flask import url_for, render_template, request, redirect, session
+
 from flask_app.controllers.users import render_user_page
 
 from flask_app import app
@@ -51,7 +52,7 @@ def process_login():
         return redirect('/signup')
     # if the passwords matched
     session['user_id'] = acceptable_id
-    return(redirect(url_for('render_user_page', user_id=acceptable_id)))
+    return(redirect(url_for(render_user_page, user_id=acceptable_id)))
 
 @app.route('/signup')
 def signup_form():
