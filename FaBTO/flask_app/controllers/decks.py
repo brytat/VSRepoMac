@@ -1,10 +1,11 @@
-from flask import render_template, redirect, request, session
+from flask import url_for, render_template, redirect, request, session
 from flask_app import app
 from flask_app.models.deck import Deck
+from flask_app.controllers.users import render_decks_page
 
 @app.route('/deck/create', methods=['POST'])
 def create_deck():
-    if 'user_id' not in session:
+    if request.form['user_id'] not in session:
         return redirect('/')
     data = {
         "deck_hero":request.form['deck_hero'],
@@ -15,7 +16,7 @@ def create_deck():
     }
     print(data)
     Deck.create_deck(data)
-    return redirect('/user/deck/<string:user_id>')
+    return redirect(url_for('render_decks_page', user_id=session['user_id']))
 
 @app.route('/deck/edit/<int:deck_id>')
 def render_edit_deck(deck_id):
