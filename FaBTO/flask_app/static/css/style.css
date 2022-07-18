@@ -1,7 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
-    border: 1px red solid;
+    /* border: 1px red solid; */
 }
 
 body {
@@ -29,18 +29,17 @@ header {
     background-color: #777;
 }
 
-main {
-    /* margin:auto; */
+.center {
     display: inline-flex;
     justify-content: center;
 }
 
-button, a, img {
+button, a, img{
     cursor: pointer;
 }
 
 
-h3 {
+h3{
     width: 100%;
     max-width: 300px;
     display: inline-flex;
@@ -63,7 +62,8 @@ h3 {
 }
 
 .panel {
-    margin: 20px;
+    margin: 5px;
+    padding: 5px;
     border: 2px black solid;
 }
 

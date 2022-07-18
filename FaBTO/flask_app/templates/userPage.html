@@ -13,6 +13,7 @@
     <header>
         <div>
             <h1>Flesh and Blood Tournament Organizer</h1>
+            <a href="/user/{{ session.user_id }}">Home</a>
         </div>
         <form>
             <input placeholder="Search">
@@ -22,13 +23,13 @@
             <button id="logoutButton">Logout</button>
         </form>
     </header>
-    <main>
-        <div id="leftPanel" class="panel">
+    <main class="center">
+        <div id="leftPanel" class="panel p-1">
             <p>Hi {{ user.username }}</p>
         </div>
-        <div id="centerPanel" class="panel bg-dark text-white bg-opacity-75">
+        <div id="centerPanel" class="panel p-3 bg-dark text-white bg-opacity-75">
             <div id="tabs">
-                <h3><a href="/user/deck/{{ user.username }}">Decks</a></h3>
+                <h3><a href="/user/decks/{{ user.user_id }}">Decks</a></h3>
                 <h3>Hubs</h3>
             </div> 
             {% for post in posts %}
@@ -38,7 +39,7 @@
                 </div>
             {% endfor %}
         </div>
-        <div id="rightPanel" class="panel">
+        <div id="rightPanel" class="panel p-1">
             <h2>{{ user.username }}</h2> 
             <img src="PLACEHOLDER" alt="Profile_Pic" id="profilePic">
             

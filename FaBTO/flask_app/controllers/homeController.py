@@ -1,5 +1,5 @@
-from flask import flash
-from flask import render_template, request, redirect, session
+from flask import url_for, render_template, request, redirect, session
+from flask_app.controllers.users import render_user_page
 
 from flask_app import app
 from flask_app.models.user import User
@@ -36,11 +36,12 @@ def create_user():
 @app.route('/login', methods=['POST'])
 def process_login():
     data = {
-        'username':request.form['username'],
+        'username':request.form['username']
     }
     user_in_db = User.get_by_username(data)
-    # acceptable_id = User.validate_login(request.form, data)
+    acceptable_id = User.validate_login(request.form, data)
     if not user_in_db:
+<<<<<<< HEAD
         flash("Invalid login credentials.")
         print("user attempted to find a user not in DB")
         return redirect('/signup')
@@ -55,6 +56,19 @@ def process_login():
     # if the passwords matched,
     session['user_id'] = user_in_db.user_id
     return redirect('/user/<string:username>')
+=======
+        # flash("Invalid login credentials.")
+        return redirect('/signup')
+    if acceptable_id == False:
+        return redirect('/signup')
+    if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
+        # if we get False after checking the password
+        # flash("Invalid Email/Password")
+        return redirect('/signup')
+    # if the passwords matched
+    session['user_id'] = acceptable_id
+    return(redirect(url_for('render_user_page', user_id=acceptable_id)))
+>>>>>>> ee49c6006e0e114b3ffd2bba2ed3cce813bb599e
 
 @app.route('/signup')
 def signup_form():
