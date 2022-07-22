@@ -1,11 +1,15 @@
 from flask import url_for, render_template, redirect, request, session
+
 from flask_app import app
 from flask_app.models.deck import Deck
 
+from flask_app.controllers.users import render_decks_page
+
 @app.route('/deck/create', methods=['POST'])
 def create_deck():
-    if 'user_id' not in session:
-        return redirect('/')
+    if request.form['user_id'] not in session:
+        flash("You are not able to make decks for another user.")
+        return redirect(url_for('render_decks_page', user_id=request.form['user_id']))
     data = {
         "deck_hero":request.form['deck_hero'],
         "format":request.form['format'],
@@ -31,7 +35,7 @@ def render_edit_deck(deck_id):
 
 @app.route('/deck/update/<int:deck_id>', methods=['POST'])
 def process_update_deck(deck_id):
-    if 'user_id' not in session:
+    if session['user_id'] not in session:
         return redirect('/')
     data = {
         'deck_hero': request.form['deck_hero'],
@@ -46,7 +50,7 @@ def process_update_deck(deck_id):
 
 @app.route('/deck/delete/<int:deck_id>')
 def delete_deck(deck_id):
-    if 'user_id' not in session:
+    if session['user_id'] not in session:
         return redirect('/')
     data = {
         'deck_id': deck_id
