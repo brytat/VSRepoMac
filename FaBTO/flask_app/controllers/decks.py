@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, session
+from flask import url_for, render_template, redirect, request, session
 from flask_app import app
 from flask_app.models.deck import Deck
 
@@ -15,7 +15,7 @@ def create_deck():
     }
     print(data)
     Deck.create_deck(data)
-    return redirect('/user/deck/<string:user_id>')
+    return redirect(url_for('render_decks_page', user_id=session['user_id']))
 
 @app.route('/deck/edit/<int:deck_id>')
 def render_edit_deck(deck_id):
@@ -42,7 +42,7 @@ def process_update_deck(deck_id):
     }
     print(data)
     Deck.update_deck(data)
-    return redirect('/user/deck/<string:user_id>')
+    return redirect(url_for('render_decks_page', user_id=session['user_id']))
 
 @app.route('/deck/delete/<int:deck_id>')
 def delete_deck(deck_id):
@@ -52,4 +52,4 @@ def delete_deck(deck_id):
         'deck_id': deck_id
     }
     Deck.delete_deck(data)
-    return redirect('/user/deck/<string:username>')
+    return redirect(url_for('render_decks_page', user_id=session['user_id']))

@@ -55,7 +55,7 @@
             <div>
                 <h3>Make a new Deck</h3>
                 <div class="container">
-                    <form action="/deck/create" method="post" class="p-3 col-4 mx-auto my-5">
+                    <form action="/deck/create" method="post" class="col-4 mx-auto my-5">
                         {% with messages = get_flashed_messages() %}
                             {% if messages %}
                                 {% for message in messages %}
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </div>
-        <div id="rightPanel" class="panel">
+        <div id="rightPanel" class="panel p-1">
             <h2>{{ user.username }}</h2> 
             <img src="PLACEHOLDER" alt="Profile_Pic" id="profilePic">
             
