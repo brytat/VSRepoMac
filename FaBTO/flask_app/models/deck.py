@@ -35,9 +35,9 @@ class Deck:
         query = "SELECT * FROM decks WHERE user_id = %(user_id)s;"
         decks_from_db = connectToMySQL(cls.db_name).query_db(query, data)
         decks = []
-        if decks_from_db > 0:
-            for row in decks_from_db:
-                decks.append( cls(row) )
+        # if decks_from_db < 0:
+        for row in decks_from_db:
+            decks.append( cls(row) )
         print(decks)
         print(query)
         return decks

@@ -30,8 +30,8 @@ def render_edit_deck(deck_id):
         'deck_id': deck_id
     }
     deck = Deck.get_one(data)
-    deckhtml = deck[0]
-    return render_template('editDeck.html', deck=deckhtml, pageName=pageName)
+    deck = deck[0]
+    return render_template('editDeck.html', deck=deck, pageName=pageName)
 
 @app.route('/deck/update/<int:deck_id>', methods=['POST'])
 def process_update_deck(deck_id):
