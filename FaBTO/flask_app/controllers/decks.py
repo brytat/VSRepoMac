@@ -1,7 +1,9 @@
+
 from flask import url_for, render_template, redirect, request, session
 
 from flask_app import app
 from flask_app.models.deck import Deck
+from flask_app.models.user import User
 
 from flask_app.controllers.users import render_decks_page
 
@@ -29,9 +31,13 @@ def render_edit_deck(deck_id):
     data = {
         'deck_id': deck_id
     }
+    data1 = {
+        "user_id": session['user_id']
+    }
     deck = Deck.get_one(data)
     deck = deck[0]
-    return render_template('editDeck.html', deck=deck, pageName=pageName)
+    user = User.get_one(data1)
+    return render_template('editDeck.html', user=user, deck=deck, pageName=pageName)
 
 @app.route('/deck/update/<int:deck_id>', methods=['POST'])
 def process_update_deck(deck_id):

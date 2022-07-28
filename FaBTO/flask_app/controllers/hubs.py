@@ -1,4 +1,4 @@
-from flask import render_template, session, redirect, request
+from flask import url_for, render_template, session, redirect, request
 
 from flask_app import app
 from flask_app.models.hub import Hub
@@ -13,7 +13,7 @@ def process_hub_login():
     if acceptable_id == False:
         return redirect('/hub')
     session['hub_id'] = acceptable_id
-    return redirect('/hub/<string:hub_id>')
+    return redirect(url_for('render_hub_page', hub_id=session['hub_id']))
 
 @app.route('/hub/<string:hub_id>')
 def render_hub_page(hub):

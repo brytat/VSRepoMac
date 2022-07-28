@@ -28,6 +28,10 @@
             <p>Hi {{ user.username }}</p>
         </div>
         <div id="centerPanel" class="panel p-3 container bg-dark text-white w-75 bg-opacity-75">
+            <div id="tabs">
+                <h3 class="pageTab"><a href="/user/{{ user.user_id }}">Home</a></h3>
+                <h3 class="pageTab"><a>Hubs</a></h3>
+            </div> 
             <div>
                 <h3>{{ user.username }}'s Decks</h3>
                 <table class="table table-info">
@@ -96,7 +100,7 @@
             <h2>{{ user.username }}</h2> 
             <img src="PLACEHOLDER" alt="Profile_Pic" id="profilePic">
             
-            <div>
+            <div class="d-flex flex-column">
                 <a href="#">Friends</a>
                 <a href="#">Send Friend Request</a>
                 <a href="#">Invite to event</a>

@@ -39,7 +39,7 @@ button, a, img{
 }
 
 
-h3{
+.pageTab{
     width: 100%;
     max-width: 300px;
     display: inline-flex;
@@ -50,29 +50,10 @@ h3{
     color: red;
 }
 
-.bg{
-    url(https://fabdb2.imgix.net/assets/backgrounds/background-tales-of-aria.jpg?auto=format) no-repeat top center;
-    position:absolute;
-    left:0px;
-    top:0px;
-    z-index:-1;
-    height: auto;
-    max-width: 100%;
-    height: auto;
-}
-
 .panel {
     margin: 5px;
     padding: 5px;
     border: 2px black solid;
-}
-
-.like {
-    display: inline-flex;
-}
-
-.heart {
-    height: 25px;
 }
 
 #tabs {

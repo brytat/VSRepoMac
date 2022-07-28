@@ -23,14 +23,14 @@
             <button id="logoutButton">Logout</button>
         </form>
     </header>
-    <main class="center">
+    <main class="container d-flex">
         <div id="leftPanel" class="panel p-1">
             <p>Hi {{ user.username }}</p>
         </div>
         <div id="centerPanel" class="panel p-3 bg-dark text-white bg-opacity-75">
             <div id="tabs">
-                <h3><a href="/user/decks/{{ user.user_id }}">Decks</a></h3>
-                <h3>Hubs</h3>
+                <h3 class="pageTab"><a href="/user/decks/{{ user.user_id }}">Decks</a></h3>
+                <h3 class="pageTab"><a>Hubs</a></h3>
             </div> 
             {% for post in posts %}
                 <div>
@@ -43,7 +43,7 @@
             <h2>{{ user.username }}</h2> 
             <img src="PLACEHOLDER" alt="Profile_Pic" id="profilePic">
             
-            <div>
+            <div class="d-flex flex-column">
                 <a href="#">Friends</a>
                 <a href="#">Send Friend Request</a>
                 <a href="#">Invite to event</a>
