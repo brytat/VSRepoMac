@@ -29,8 +29,9 @@
         </div>
         <div id="centerPanel" class="panel p-3 bg-dark text-white bg-opacity-75">
             <div id="tabs">
-                <h3 class="pageTab"><a href="/user/decks/{{ user.user_id }}">Decks</a></h3>
-                <h3 class="pageTab"><a>Hubs</a></h3>
+                <h3 class="pageTab"><a href="/user/{{ user.user_id }}/decks">Decks</a></h3>
+                <h3 class="pageTab"><a href="#">Friends</a></h3>
+                <h3 class="pageTab"><a href="#">Hubs</a></h3>
             </div> 
             {% for post in posts %}
                 <div>

@@ -13,10 +13,6 @@ def homePage():
     print("User navigated to: " + pageName)
     return render_template("frontPage.html", pageName = pageName)
 
-# @app.route('/user/<string:username>')
-# def hello(username):
-#     return render_template('userPage.html', userhtml=username)
-
 @app.route('/create', methods=['POST'])
 def create_user():
     if not User.validate_user(request.form):
@@ -68,4 +64,4 @@ def signup_form_hub():
 @app.route("/logout")
 def log_out():
     session.clear()
-    return redirect("/")
+    return redirect("/signup")

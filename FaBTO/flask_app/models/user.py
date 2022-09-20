@@ -33,9 +33,11 @@ class User:
     def get_by_username(cls, data):
         query= "SELECT * FROM users WHERE username = %(username)s;"
         user_from_db = connectToMySQL(cls.db_name).query_db(query, data)
+        print("From models user.py get_by_username result: ")
         if len(user_from_db) < 1:
             return False
-        return cls(user_from_db[0])
+        else:
+            return cls(user_from_db[0])
 
 #This needs work. Need to validate that there are no duplicate cities entering in DB. Also need to add city.id to user.loction_city_id
     @classmethod
@@ -96,12 +98,13 @@ class User:
         print(list_of_users)
         if len(list_of_users) < 1:
             is_valid = False
-            # flash("Invalid login credentials.")
-        this_user = list_of_users[0]
-        user_instance = User(this_user)
+            flash("Invalid login credentials.")
+        else:
+            this_user = list_of_users[0]
+            user_instance = User(this_user)
         if is_valid and not bcrypt.check_password_hash(user_instance.password, form_data['password']):
             is_valid = False
-            # flash("Invalid login credentials.")
+            flash("Invalid login credentials.")
         if is_valid:
             is_valid = user_instance.user_id
         return is_valid

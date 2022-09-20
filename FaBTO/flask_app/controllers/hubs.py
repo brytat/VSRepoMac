@@ -29,7 +29,7 @@ def render_hub_page(hub):
 
 
 # Needs work need to properly call the hub info from path and check if user is in session and import the deck information of the user in session
-@app.route('/hub/pits/<string:hub_un>')
+@app.route('/hub/<string:hub_un>/pits')
 def render_pits_page(hub):
     pageName = "Pits"
     if "user_id" not in session:
