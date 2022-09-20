@@ -42,4 +42,4 @@ def render_pits_page(hub):
     }
     user= User.get_one(dataUser)
     hub = Hub.get_one(data)
-    return render_template('hubPitsPage.html', pageName=pageName, hub=hub, user=user)
+    return render_template('hubPits.html', pageName=pageName, hub=hub, user=user)
