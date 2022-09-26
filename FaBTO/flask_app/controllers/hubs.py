@@ -34,6 +34,7 @@ def render_pits_page(hub):
     pageName = "Pits"
     if "user_id" not in session:
         return redirect('/')
+    
     data = {
         "hub_id": session['hub_id']
     }
