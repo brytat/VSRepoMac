@@ -23,5 +23,31 @@
             <button id="logoutButton">Logout</button>
         </form>
     </header>
+    <main>
+        <div id="leftPanel" class="panel">
+            <p>Welcome to {{ hub.hub_name }}</p>
+            <p>{{ hub.hub_location }}</p>
+            <p>{{ hub.hub_description }}</p>
+        </div>
+        <div id="centerPanel" class="panel p-3 container bg-dark text-white bg-opacity-75">
+            <div id="tabs">
+                <h3><a href="/hub/users/{{ hub.hub_un }}">Members</a></h3>
+                <h3><a href="/hub/pits/{{ hub.hub_un }}">Enter the Pits!</a></h3>
+            </div> 
+            <div>
+                <button>Join Game!</button>
+            </div>
+        </div>
+        <div id="rightPanel" class="panel">
+            <h2>{{ hub.hub_name }}</h2> 
+            <img src="PLACEHOLDER" alt="Profile_Pic" id="profilePic">
+            
+            <div class="d-flex flex-column">
+                <a href="#">Join</a>
+                <a href="#">Members</a>
+                <a href="#">Block</a>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

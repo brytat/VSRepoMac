@@ -10,7 +10,6 @@ class Hub:
 
     def __init__(self, data):
         self.hub_id = data['hub_id']
-        self.hub_un = data['hub_un']
         self.hub_name = data['hub_name']
         self.hub_email = data['hub_email']
         self.hub_location = data['hub_location']
@@ -29,7 +28,7 @@ class Hub:
 
     @classmethod
     def save_hub_to_db(cls, data):
-        query = "INSERT INTO hubs (hub_un,hub_name,hub_email,hub_location,hub_description,hub_password) VALUES (%(hub_un)s,%(hub_name)s,%(hub_email)s,%(hub_location)s,%(hub_description)s,%(hub_password)s);"
+        query = "INSERT INTO hubs (hub_name,hub_email,hub_location,hub_description,hub_password) VALUES (%(hub_name)s,%(hub_email)s,%(hub_location)s,%(hub_description)s,%(hub_password)s);"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
@@ -40,9 +39,6 @@ class Hub:
     @staticmethod
     def validate_hub(hub):
         is_valid = True
-        if len(hub['hub_un']) < 3:
-            flash("Username must be at least 3 characters.")
-            is_valid = False
         if not EMAIL_REGEX.match(hub['email']):
             flash("Invalid email address.")
             is_valid = False
@@ -57,7 +53,7 @@ class Hub:
     @staticmethod
     def validate_login_hub(form_data, data_dictionary):
         is_valid = True
-        query = "SELECT * FROM hubs WHERE hub_un = %(hub_un)s;"
+        query = "SELECT * FROM hubs WHERE hub_name = %(hub_name)s;"
         list_of_hubs = connectToMySQL(Hub.db_name).query_db(query, data_dictionary)
         if len(list_of_hubs) < 1:
             is_valid = False

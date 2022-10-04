@@ -6,4 +6,4 @@ async function getHeroNames() {
     return heroNames;
 }
     
-console.log(getHeroNames());
+console.log(getHeroNames());   

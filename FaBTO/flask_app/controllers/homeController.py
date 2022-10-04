@@ -4,6 +4,7 @@ from flask_app.controllers.users import render_user_page
 
 from flask_app import app
 from flask_app.models.user import User
+from flask_app.models.hub import Hub
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -13,7 +14,7 @@ def homePage():
     print("User navigated to: " + pageName)
     return render_template("frontPage.html", pageName = pageName)
 
-@app.route('/create', methods=['POST'])
+@app.route('/user/create', methods=['POST'])
 def create_user():
     if not User.validate_user(request.form):
         return redirect('/signup')
@@ -28,6 +29,23 @@ def create_user():
     }
     user_id = User.save_user_to_db(data)
     session['user_id'] = user_id
+    return redirect('/signup')
+
+@app.route('/hub/create', methods=['POST'])
+def create_hub():
+    if not Hub.validate_hub(request.form):
+        return redirect('/signup')
+    pw_hash = bcrypt.generate_password_hash(request.form['password'])
+    print(pw_hash)
+    data = {
+        "hub_name":request.form['hub_name'],
+        "hub_email":request.form['hub_email'],
+        "hub_location":request.form['hub_location'],  
+        "hub_description":request.form['hub_description'],
+        "password":pw_hash
+    }
+    hub_id = Hub.save_hub_to_db(data)
+    session['user_id'] = hub_id
     return redirect('/signup')
 
 @app.route('/login', methods=['POST'])
@@ -59,7 +77,7 @@ def signup_form():
 @app.route('/hub/signup')
 def signup_form_hub():
     pageName = "Hub sign up or sign in"
-    return render_template('hubSignUp.html', pageName = pageName)
+    return render_template('Hub/hubSignUp.html', pageName = pageName)
 
 @app.route("/logout")
 def log_out():

@@ -41,7 +41,7 @@
         </div>
         <div class='p-3 container bg-dark text-white w-75 bg-opacity-75' style="max-width: 800px;">
             <h1>Or Sign Up!</h1>
-            <form action="/create" method="post" class="p-3 col-4 mx-auto my-5">
+            <form action="/hub/create" method="post" class="p-3 col-4 mx-auto my-5">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}
@@ -49,10 +49,6 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-                <div class='form-group'>
-                    <label for='hub_un'>Hub Username:</label>
-                    <input type="text" name='hub_un' placeholder="Username">
-                </div>
                 <div class='form-group'>
                     <label for='hub_name'>Hub Name:</label>
                     <input type="text" name='hub_name' placeholder="Name">
