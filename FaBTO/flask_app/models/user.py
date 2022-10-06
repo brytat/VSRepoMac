@@ -55,6 +55,16 @@ class User:
         for user in results:
             users.append( cls(user) )
         return users
+
+    @classmethod
+    def get_hubs_from_one_user(cls, data):
+        #NEED TO COMPLETE QUERY WITH LEFT JOIN ON HUBS TO USERS
+        query = "SELECT * FROM users WHERE user_id = %(username)s LEFT JOIN "
+        results = connectToMySQL(cls.db_name).query_db(query)
+        hubs = []
+        for hub in results:
+            hubs.append( cls(hub) )
+        return hubs
     
     @classmethod
     def join_hub(cls, data):

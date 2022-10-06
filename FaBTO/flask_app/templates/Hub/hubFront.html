@@ -23,8 +23,8 @@
             <button id="logoutButton">Logout</button>
         </form>
     </header>
-    <main>
-        <div id="leftPanel" class="panel">
+    <main class="container d-flex">
+        <div id="leftPanel" class="panel p-1">
             <p>Welcome to {{ hub.hub_name }}</p>
             <p>{{ hub.hub_location }}</p>
             <p>{{ hub.hub_description }}</p>
@@ -41,7 +41,7 @@
                 </div>
             {% endfor %}
         </div>
-        <div id="rightPanel" class="panel">
+        <div id="rightPanel" class="panel p-1">
             <h2>{{ hub.hub_name }}</h2> 
             <img src="PLACEHOLDER" alt="Profile_Pic" id="profilePic">
             
