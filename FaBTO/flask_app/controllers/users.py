@@ -1,8 +1,6 @@
-from nturl2path import url2pathname
-from flask import render_template, session, redirect
-import urllib.request, json
 
-import os
+from flask import render_template, session, redirect
+import os, requests
 
 from flask_app import app
 from flask_app.models.user import User
@@ -26,22 +24,26 @@ def render_user_page(user_id):
 
 @app.route('/user/<string:user_id>/decks')
 def render_decks_page(user_id):
-    #Its about time i start using the API to get all the heroes 10.05.22
-    url = "https://api.fabdb.net/cards?keywords=young".format(os.environ.get("73147f2ead15749ea59552e3940a6f9a9835eb861fd12052c1406a3897c7d9e9"))
-    response = urllib.request.urlopen(url)
-    data = response.read()
-    dict =json.loads(data)
-    #End of the API construction
+    #Its about time I start using the API to get all the heroes 10.05.22
     pageName = "User Page"
-    if "user_id" not in session:
-        return redirect('/')
     data = {
         "user_id": user_id
     }
     decks = Deck.get_decks_from_one_user(data)
     user = User.get_one(data)
     print(user)
-    return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks, heroes = dict["results"])
+    if "user_id" not in session:
+        return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks)
+    url = "https://api.fabdb.net/cards?keywords=hero&young".format(os.environ.get("73147f2ead15749ea59552e3940a6f9a9835eb861fd12052c1406a3897c7d9e9"))
+    response = requests.get(url)
+    heroesJSON = response.json()
+    listHeroes = []
+    for hero in heroesJSON:
+    #This is definitely NOT how to construct a list of hero names, work on the appending. 10.30.22
+        listHeroes.append( data(hero) )
+    print(heroesJSON)
+    #End of the API construction
+    return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks, heroes = listHeroes)
 
 @app.route('/user/<string:user_id>/hubs')
 def render_user_hubs_page(user_id):
