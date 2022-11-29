@@ -43,12 +43,8 @@ def render_decks_page(user_id):
     listHeroes = []
     for hero in heroesJSON:
     #This is definitely NOT how to construct a list of hero names, work on the appending. 10.30.22
-<<<<<<< HEAD
         listHeroes.append( hero(data) )
     print(listHeroes)
-=======
-        listHeroes.append( data(hero) )
->>>>>>> 253df59a4309650be6316ffa21c13b00c6e0dc1c
     #End of the API construction
     return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks, heroes = listHeroes)
 
