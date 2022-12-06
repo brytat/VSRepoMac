@@ -24,7 +24,7 @@ class User:
     def get_one(cls, data):
         query = "SELECT * FROM users WHERE user_id = %(user_id)s;"
         user_from_db = connectToMySQL(cls.db_name).query_db(query, data)
-        print("From model user.py print user_from_db result: " + user_from_db)
+        print("From model user.py print user_from_db result: %(user_from_db)s")
         if len(user_from_db) < 1:
             return False
         return cls(user_from_db[0])
@@ -33,7 +33,7 @@ class User:
     def get_by_username(cls, data):
         query= "SELECT * FROM users WHERE username = %(username)s;"
         user_from_db = connectToMySQL(cls.db_name).query_db(query, data)
-        print("From models user.py print get_by_username result: " + user_from_db)
+        print("From models user.py print get_by_username result: %(user_from_db)s")
         if len(user_from_db) < 1:
             return False
         else:
@@ -74,7 +74,7 @@ class User:
     @classmethod
     def leave_hub(cls, data):
         query  = "DELETE FROM users_has_hubs WHERE deck_id = %(deck_id)s;"
-        print("MySQL query: " + query)
+        print("MySQL query: %(query)s")
         return connectToMySQL(cls.db_name).query_db(query, data)
 
     @staticmethod
@@ -105,7 +105,7 @@ class User:
         is_valid = True
         query = "SELECT * FROM users WHERE username = %(username)s;"
         list_of_users = connectToMySQL(User.db_name).query_db(query, data_dictionary)
-        print("From models user.py print var list_of_users: " + list_of_users)
+        print("From models user.py print var list_of_users: %(list_of_users)s")
         if len(list_of_users) < 1:
             is_valid = False
             flash("Invalid login credentials.")
