@@ -25,7 +25,7 @@ def create_user():
         "first_name":request.form['first_name'],  
         "last_name":request.form['last_name'],
         "email":request.form['email'],
-        "password":pw_hash
+        "password_hash":pw_hash
     }
     user_id = User.save_user_to_db(data)
     session['user_id'] = user_id
@@ -42,7 +42,7 @@ def create_hub():
         "hub_email":request.form['hub_email'],
         "hub_location":request.form['hub_location'],  
         "hub_description":request.form['hub_description'],
-        "password":pw_hash
+        "password_hash":pw_hash
     }
     hub_id = Hub.save_hub_to_db(data)
     session['user_id'] = hub_id
@@ -54,10 +54,10 @@ def process_login():
         'username':request.form['username']
     }
     user_in_db = User.get_by_username(data)
-    acceptable_id = User.validate_login(request.form, data)
     if user_in_db == False:
-        flash("No user with that Usename")
+        flash("No user with that username")
         return redirect('/signup')
+    acceptable_id = User.validate_login(request.form, data)
     if acceptable_id == False:
         flash("invalid login credentials.")
         return redirect('/signup')
