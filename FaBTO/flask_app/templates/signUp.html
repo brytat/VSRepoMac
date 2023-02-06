@@ -36,10 +36,12 @@
                 {% endwith %}
                 <div class='form-group'>
                     <label class='col' for='username'>Username:</label>
+                    <br>
                     <input class='col' type="text" id="username" name='username'>
                 </div>
                 <div class='form-group'>
                     <label class='col' for='password'>Password:</label>
+                    <br>
                     <input class='col' type="password" id='password' name='password'>
                     <div class="text-right"><input type="checkbox" onclick="showPW()">Show Password</div>
                 </div>
@@ -51,26 +53,32 @@
             <form action="/user/create" method="post" class="p-3 col-4 mx-auto my-5">
                 <div class='form-group'>
                     <label for='username'>Username:</label>
+                    <br>
                     <input type="text" name='username' placeholder="Username">
                 </div>
                 <div class='form-group'>
                     <label for='first_name'>First Name:</label>
+                    <br>
                     <input type="text" name='first_name' placeholder="First Name">
                 </div>
                 <div class='form-group'>
                     <label for='last_name'>Last Name:</label>
+                    <br>
                     <input type="text" name='last_name' placeholder="Last Name">
                 </div>
                 <div class="form-group">
                     <label for='email'>E-mail:</label>
+                    <br>
                     <input type="email" name='email' placeholder="Email">                    
                 </div>
                 <div class="form-group">
                     <label for='password'>Password:</label>
+                    <br>
                     <input type='password' name='password'>                    
                 </div>
                 <div class="form-group">
                     <label for='confirm_password'>Confirm Password:</label>
+                    <br>
                     <input type='password' name='confirm_password'>                    
                 </div>
                 <input type='submit' value="Submit" class="btn btn-warning">

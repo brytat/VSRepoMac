@@ -9,10 +9,9 @@ class Hub:
     db_name="FaBTO"
 
     def __init__(self, data):
-        self.id = data['id']
+        self.hub_id = data['hub_id']
         self.name = data['name']
         self.email = data['email']
-        self.location = data['location']
         self.unit = data['unit']
         self.street = data['street']
         self.city = data['city']
@@ -33,7 +32,7 @@ class Hub:
 
     @classmethod
     def save_hub_to_db(cls, data):
-        query = "INSERT INTO hubs (hub_name,hub_email,hub_location,hub_description,hub_password) VALUES (%(hub_name)s,%(hub_email)s,%(hub_location)s,%(hub_description)s,%(hub_password)s);"
+        query = "INSERT INTO hubs (name,email,unit,street,city,state,zip,description,password_hash) VALUES (%(hub_name)s,%(hub_email)s,%(hub_unit)s,%(hub_street)s,%(hub_city)s,%(hub_state)s,%(hub_zip)s,%(hub_description)s,%(hub_password)s);"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
@@ -63,11 +62,13 @@ class Hub:
         if len(list_of_hubs) < 1:
             is_valid = False
             flash("Invalid login credentials.")
+            return is_valid
         this_hub = list_of_hubs[0]
         hub_instance = Hub(this_hub)
         if is_valid and not bcrypt.check_password_hash(hub_instance.password, form_data['password']):
             is_valid = False
             flash("Invalid login credentials.")
+            return is_valid
         if is_valid:
             is_valid = hub_instance.hub_id
         return is_valid

@@ -15,7 +15,7 @@ class User:
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
-        self.password_hash = data['password_hash    ']
+        self.password_hash = data['password_hash']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -42,7 +42,7 @@ class User:
 #This needs work. Need to validate that there are no duplicate cities entering in DB. Also need to add city.id to user.loction_city_id
     @classmethod
     def save_user_to_db(cls, data):
-        query = "INSERT INTO users (username,first_name,last_name,email,password) VALUES (%(username)s,%(first_name)s,%(last_name)s,%(email)s,%(password_hash)s);"
+        query = "INSERT INTO users (username,first_name,last_name,email,password_hash) VALUES (%(username)s,%(first_name)s,%(last_name)s,%(email)s,%(password_hash)s);"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     #search function needs to be created
