@@ -9,12 +9,17 @@ class Hub:
     db_name="FaBTO"
 
     def __init__(self, data):
-        self.hub_id = data['hub_id']
-        self.hub_name = data['hub_name']
-        self.hub_email = data['hub_email']
-        self.hub_location = data['hub_location']
-        self.hub_desription = data['hub_description']
-        self.password = data['password']
+        self.id = data['id']
+        self.name = data['name']
+        self.email = data['email']
+        self.location = data['location']
+        self.unit = data['unit']
+        self.street = data['street']
+        self.city = data['city']
+        self.state = data['state']
+        self.zip = data['zip']
+        self.desription = data['description']
+        self.password_hash = data['password_hash']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
