@@ -37,10 +37,7 @@ def render_decks_page(user_id):
         return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks)
     url = "https://api.fabdb.net/cards?keywords=hero&young".format(os.environ.get("73147f2ead15749ea59552e3940a6f9a9835eb861fd12052c1406a3897c7d9e9"))
     response = requests.get(url)
-    print("URL VARIABLE")
-    print(url)
-    print("RESPONSE VARIABLE")
-    print(response)
+
     #print("This is the response var: " + response)
     heroesJSON = response.json()
     #print("This is the heroesJSON var: " + heroesJSON)
