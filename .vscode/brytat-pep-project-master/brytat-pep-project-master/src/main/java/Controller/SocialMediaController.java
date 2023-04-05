@@ -4,6 +4,7 @@ package Controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import DAO.SocialMediaDAO;
 import Model.Account;
 import Model.Message;
 import Service.SocialMediaService;
@@ -63,7 +64,7 @@ public class SocialMediaController {
     private void postRegisterHandler(Context ctx) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Account account = mapper.readValue(ctx.body(), Account.class);
-        Account addedAcct = socialMediaService.postRegisterHandler(account);
+        Account addedAcct = socialMediaService.postRegister(account);
         System.out.println(account);
         if(addedAcct==null){
             ctx.status(400);
@@ -95,48 +96,44 @@ public class SocialMediaController {
         }
     }
 
-    private Context getAllMsgHandler(Context ctx) {
-        Context JSONresp = ctx.json(socialMediaService.getAllMsgHandler());
-        return JSONresp;
+    private void getAllMsgHandler(Context ctx) {
+        ctx.json(socialMediaService.getAllMsg());
     }
 
-    private Context getMsgByIdHandler(Context ctx) {
-        Context JSONresp = ctx.json(socialMediaService.getMsgByIdHandler(Integer.valueOf(ctx.pathParam("message_id"))));
-        if(JSONresp==null){
-            return ctx.status(200);
-        }else{
-            return JSONresp;
+    // updated code!!!!
+    private void getMsgByIdHandler(Context ctx) {
+        Message message = socialMediaService.getMsgById(Integer.parseInt(ctx.pathParam("message_id")));
+        if(message.message_id == 0){
+        }else {
+            ctx.json(message);
         }
     }
 
     private void deleteMsgByIdHandler(Context ctx) {
         int message_id = Integer.parseInt(ctx.pathParam("message_id"));
-        socialMediaService.deleteMsgByIdHandler(message_id);
-        ctx.json(socialMediaService.getMsgByIdHandler(Integer.parseInt(ctx.pathParam("message_id"))));
+        if(socialMediaService.getMsgById(message_id).message_id == 0){
+        }else{
+            Message message = socialMediaService.getMsgById(message_id);
+            socialMediaService.deleteMsgById(message_id);
+            ctx.json(message);
+        }
     }
 
-    private Context patchMsgByIdHandler(Context ctx) throws JsonProcessingException {
+    private void patchMsgByIdHandler(Context ctx) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         Message message = mapper.readValue(ctx.body(), Message.class);
-        System.out.println("this is the ctx message_text: " + message.getMessage_text());
-        if (message.getMessage_text().length() < 1 || message.getMessage_text().length() > 254){
+        int message_id = Integer.parseInt(ctx.pathParam("message_id"));
+        if (message.getMessage_text().length() < 1 || message.getMessage_text().length() > 254 || socialMediaService.getMsgById(message_id).message_id == 0) {
             System.out.println("invalid message");
             ctx.status(400);
-            return null;
+        } else {
+            socialMediaService.patchMsgById(message_id, message.getMessage_text());
+            Message ret = socialMediaService.getMsgById(message_id);
+            System.out.println(ret);
+            ctx.json(ret);
         }
-        int message_id = Integer.parseInt(ctx.pathParam("message_id"));
-        if (socialMediaService.getMsgByIdHandler(message_id) == null) {
-            ctx.status(400);
-            return null;
-        }
-        socialMediaService.patchMsgByIdHandler(message_id, message.getMessage_text());
-        Message ret = socialMediaService.getMsgByIdHandler(message_id);
-        System.out.println(ret);
-        return ctx.json(ret);
     }
-
-    private Context getMsgByUserIdHandler(Context ctx) {
-        Context JSONresp = ctx.json(socialMediaService.getMsgByUserIdHandler(Integer.valueOf(ctx.pathParam("account_id"))));
-        return JSONresp;
+    private void getMsgByUserIdHandler(Context ctx) {
+        ctx.json(socialMediaService.getMsgByUserId(Integer.parseInt(ctx.pathParam("account_id"))));
     }
 }
