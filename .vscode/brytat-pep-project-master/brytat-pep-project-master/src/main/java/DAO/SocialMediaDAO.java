@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,56 +17,83 @@ public class SocialMediaDAO {
     public Account insertAccount(Account account){
         Connection connection = ConnectionUtil.getConnection();
         try {
+            if (account.getPassword().length() < 4 || account.getUsername().length()<1){
+                return null;
+            }
             String sql = "INSERT INTO Account (username, password) VALUES (?, ?);";
 
-            PreparedStatement ps = connection.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, account.getUsername());
             ps.setString(2, account.getPassword());
-            ps.executeQuery();
-            // while(rs.next()){
-            //     Account account = new Account(rs.getInt("flight_id"), rs.getString("departure_city"),
-            //             rs.getString("arrival_city"));
-            //     account.add(account);
-            // }
+            System.out.println(ps);
+            ps.executeUpdate();
+            ResultSet pkeyrs = ps.getGeneratedKeys();
+            System.out.println("This is the generated keys " + pkeyrs);
+            if(pkeyrs.next()){
+                int generated_acct_id = pkeyrs.getInt(1);
+                System.out.println("in the if statement: " + generated_acct_id);
+                // int posted_by = pkeyrs.getInt(2);
+                // String message_text = pkeyrs.getString(3);
+                // long time_posted = pkeyrs.getLong(4);
+                return new Account(generated_acct_id, account.getUsername(), account.getPassword());
+            }
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-        return account;
+        return null;
     }
 
     public Account login(Account account){
         Connection connection = ConnectionUtil.getConnection();
         try {
-            String sql = "SELECT * FROM account WHERE username = ? && password = ?;";
+            String sql = "SELECT * FROM account WHERE username = ? AND password = ?;";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, account.getUsername());
             ps.setString(2, account.getPassword());
-            ps.executeQuery();
-        //     while(rs.next()){
-        //         rs.getString("message_body");
-        //     }
+            System.out.println(ps);
+            ResultSet rs = ps.executeQuery();
+            System.out.println(rs);
+            while(rs.next()){
+                Account acct = new Account(
+                    rs.getInt("account_id"),
+                    rs.getString("username"),
+                    rs.getString("password")
+                );
+                return acct;
+            }
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-        return account;
+        return null;
     }
 
     public Message insertMsg(Message message){
+        System.out.println(message);
         Connection connection = ConnectionUtil.getConnection();
         try {
-            String sql = "INSERT INTO message (posted_by, message_text) VALUES (?, ?);";
+            if (message.getMessage_text().length() < 1 || message.getMessage_text().length() > 254){
+                return null;
+            }
+            String sql = "INSERT INTO message (posted_by, message_text, time_posted_epoch) VALUES (?, ?, ?);";
 
-            PreparedStatement ps = connection.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
             ps.setInt(1, message.getPosted_by());
             ps.setString(2, message.getMessage_text());
-            ResultSet rs = ps.executeQuery();;
-            while(rs.next()){
-                int message_id = rs.getInt(1);
-                int posted_by = rs.getInt(2);
-                String message_text = rs.getString(3);
-                long time_posted = rs.getLong(4);
-                return new Message(message_id, posted_by, message_text, time_posted);
+            ps.setLong(3, message.getTime_posted_epoch());
+            
+            System.out.println(ps);
+            ps.executeUpdate();
+            ResultSet pkeyrs = ps.getGeneratedKeys();
+            System.out.println("This is the generated keys " + pkeyrs);
+            if(pkeyrs.next()){
+                int generated_msg_id = pkeyrs.getInt(1);
+                System.out.println("in the if statement: " + generated_msg_id);
+                // int posted_by = pkeyrs.getInt(2);
+                // String message_text = pkeyrs.getString(3);
+                // long time_posted = pkeyrs.getLong(4);
+                return new Message(generated_msg_id, message.getPosted_by(), message.getMessage_text(), message.getTime_posted_epoch());
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -80,21 +108,20 @@ public class SocialMediaDAO {
             String sql = "SELECT * FROM message;";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.executeQuery();
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Message message = new Message();
+                Message message = new Message(rs.getInt("message_id"), rs.getInt("posted_by"), rs.getString("message_text"), rs.getLong("time_posted_epoch"));
                 messages.add(message);
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
+        System.out.println(messages);
         return messages;
     }
 
-    public List<Message> getAllMsgById(int id){
+    public Message getMsgById(int id){
         Connection connection = ConnectionUtil.getConnection();
-        List<Message> messages = new ArrayList<>();
         try {
             String sql = "SELECT * FROM message WHERE message_id = (?);";
 
@@ -103,13 +130,13 @@ public class SocialMediaDAO {
             ps.executeQuery();
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Message message = new Message();
-                messages.add(message);
+                Message message = new Message(rs.getInt("message_id"), rs.getInt("posted_by"), rs.getString("message_text"), rs.getLong("time_posted_epoch"));
+                return message;
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return messages;
+        return null;
     }
 
     // public void deleteMsgById(int id){
@@ -141,11 +168,16 @@ public class SocialMediaDAO {
         List<Message> messages = new ArrayList<>();
         try {
 
-            String sql = "SELECT * FROM Message RIGHT JOIN account ON message.posted_by = account.account_id WHERE account.account_id = ?;";
+            String sql = "SELECT * FROM message INNER JOIN account ON message.posted_by = account.account_id WHERE account.account_id = ?;";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1,userId);
 
-            ps.executeUpdate();
+            ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Message message = new Message(rs.getInt("message_id"), rs.getInt("posted_by"), rs.getString("message_text"), rs.getLong("time_posted_epoch"));
+                messages.add(message);
+            }
         }catch(SQLException e){
             e.printStackTrace();
         }

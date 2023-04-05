@@ -1,6 +1,9 @@
 package Controller;
 
+import java.util.List;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Model.Account;
@@ -59,35 +62,56 @@ public class SocialMediaController {
      * This is an example handler for an example endpoint.
      * @param context The Javalin Context object manages information about both the HTTP request and response.
      */
-    private void postRegisterHandler(Context ctx) {
-        ctx.json("sample text");
-    }
-
-    private void postLoginHandler(Context ctx) {
-        ctx.json("sample text");
-    }
-
-    private Message postMsgHandler(Context ctx) throws JsonProcessingException {
+    private Context postRegisterHandler(Context ctx) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        Message message = mapper.readValue(ctx.body(), Message.class);
-        Message addedMessage = socialMediaService.addMsg(message);
-        System.out.println(addedMessage);
-        if(addedMessage==null){
+        Account account = mapper.readValue(ctx.body(), Account.class);
+        Account addedAcct = socialMediaService.postRegisterHandler(account);
+        System.out.println(account);
+        if(addedAcct==null){
             ctx.status(400);
         }else{
-            ctx.json(mapper.writeValueAsString(addedMessage));
-            ctx.status(200);
-            return addedMessage;
+            return ctx.json(addedAcct);
         }
         return null;
     }
 
-    private void getAllMsgHandler(Context ctx) {
-        ctx.json("sample text");
+    private Context postLoginHandler(Context ctx) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        Account account = mapper.readValue(ctx.body(), Account.class);
+        Account loggedInAcct = socialMediaService.postLoginHandler(account);
+        if(loggedInAcct==null){
+            ctx.status(401);
+        }else{
+            return ctx.json(loggedInAcct);
+        }
+        return null;
     }
 
-    private void getMsgByIdHandler(Context ctx) {
-        ctx.json("sample text");
+    private Context postMsgHandler(Context ctx) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        Message message = mapper.readValue(ctx.body(), Message.class);
+        Message addedMessage = socialMediaService.addMsg(message);
+        System.out.println(message);
+        if(addedMessage==null){
+            ctx.status(400);
+        }else{
+            return ctx.json(addedMessage);
+        }
+        return null;
+    }
+
+    private Context getAllMsgHandler(Context ctx) {
+        Context JSONresp = ctx.json(socialMediaService.getAllMsgHandler());
+        return JSONresp;
+    }
+
+    private Context getMsgByIdHandler(Context ctx) {
+        Context JSONresp = ctx.json(socialMediaService.getMsgByIdHandler(Integer.valueOf(ctx.pathParam("message_id"))));
+        if(JSONresp==null){
+            return ctx.status(200);
+        }else{
+            return JSONresp;
+        }
     }
 
     private void deleteMsgByIdHandler(Context ctx) {
@@ -98,7 +122,8 @@ public class SocialMediaController {
         ctx.json("sample text");
     }
 
-    private void getMsgByUserIdHandler(Context ctx) {
-        ctx.json("sample text");
+    private Context getMsgByUserIdHandler(Context ctx) {
+        Context JSONresp = ctx.json(socialMediaService.getMsgByUserIdHandler(Integer.valueOf(ctx.pathParam("account_id"))));
+        return JSONresp;
     }
 }

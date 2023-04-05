@@ -33,8 +33,8 @@ public class SocialMediaService {
         return socialMediaDAO.getAllMsg();
     }
     
-    public List<Message> getMsgByIdHandler(int id) {
-        return socialMediaDAO.getAllMsgById(id);
+    public Message getMsgByIdHandler(int account_id) {
+        return socialMediaDAO.getMsgById(account_id);
     }
 
     // public Message deleteMsgByIdHandler(int id) {
