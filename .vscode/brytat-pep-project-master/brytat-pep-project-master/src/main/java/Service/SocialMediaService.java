@@ -17,11 +17,11 @@ public class SocialMediaService {
         this.socialMediaDAO = socialMediaDAO;
     }
 
-    public Account postRegisterHandler(Account account){
+    public Account postRegister(Account account){
         return socialMediaDAO.insertAccount(account);
     }
 
-    public Account postLoginHandler(Account account){
+    public Account postLogin(Account account){
         return socialMediaDAO.login(account);
     }
 
@@ -29,11 +29,11 @@ public class SocialMediaService {
         return socialMediaDAO.insertMsg(message);
     }
 
-    public List<Message> getAllMsgHandler() {
+    public List<Message> getAllMsg() {
         return socialMediaDAO.getAllMsg();
     }
     
-    public Message getMsgByIdHandler(int message_id) {
+    public Message getMsgById(int message_id) {
         return socialMediaDAO.getMsgById(message_id);
     }
 
@@ -41,11 +41,11 @@ public class SocialMediaService {
         socialMediaDAO.deleteMsgById(id);
     }
 
-    public void patchMsgByIdHandler(int message_id, String message_text) {
+    public void patchMsgById(int message_id, String message_text) {
         socialMediaDAO.updateMsgById(message_id, message_text);
     }
 
-    public List<Message> getMsgByUserIdHandler(int userId) {
+    public List<Message> getMsgByUserId(int userId) {
         return socialMediaDAO.getMsgByUserId(userId);
     }
 }
