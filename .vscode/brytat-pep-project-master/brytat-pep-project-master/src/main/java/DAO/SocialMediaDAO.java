@@ -122,21 +122,26 @@ public class SocialMediaDAO {
 
     public Message getMsgById(int id){
         Connection connection = ConnectionUtil.getConnection();
+        Message message = new Message();
         try {
             String sql = "SELECT * FROM message WHERE message_id = (?);";
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
-            ps.executeQuery();
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                Message message = new Message(rs.getInt("message_id"), rs.getInt("posted_by"), rs.getString("message_text"), rs.getLong("time_posted_epoch"));
+            if(rs.next()){
+                // Message message = new Message(rs.getInt("message_id"), rs.getInt("posted_by"), rs.getString("message_text"), rs.getLong("time_posted_epoch"));
+                message.setMessage_id(rs.getInt("message_id"));
+                message.setPosted_by(rs.getInt("posted_by"));
+                message.setMessage_text(rs.getString("message_text"));
+                message.setTime_posted_epoch(rs.getLong("time_posted_epoch"));
                 return message;
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return null;
+        System.out.println("this shows?" +message);
+        return message;
     }
 
     public void deleteMsgById(int id){
