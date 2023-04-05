@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import DAO.SocialMediaDAO;
 import Model.Account;
 import Model.Message;
 import Service.SocialMediaService;
@@ -118,8 +119,24 @@ public class SocialMediaController {
         ctx.json("sample text");
     }
 
-    private void patchMsgByIdHandler(Context ctx) {
-        ctx.json("sample text");
+    private Context patchMsgByIdHandler(Context ctx) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        Message message = mapper.readValue(ctx.body(), Message.class);
+        System.out.println("this is the ctx message_text: " + message.getMessage_text());
+        if (message.getMessage_text().length() < 1 || message.getMessage_text().length() > 254){
+            System.out.println("invalid message");
+            ctx.status(400);
+            return null;
+        }
+        int message_id = Integer.parseInt(ctx.pathParam("message_id"));
+        if (socialMediaService.getMsgByIdHandler(message_id) == null) {
+            ctx.status(400);
+            return null;
+        }
+        socialMediaService.patchMsgByIdHandler(message_id, message.getMessage_text());
+        Message ret = socialMediaService.getMsgByIdHandler(message_id);
+        System.out.println(ret);
+        return ctx.json(ret);
     }
 
     private Context getMsgByUserIdHandler(Context ctx) {

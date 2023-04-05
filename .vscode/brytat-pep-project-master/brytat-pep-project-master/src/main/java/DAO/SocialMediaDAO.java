@@ -139,29 +139,33 @@ public class SocialMediaDAO {
         return null;
     }
 
-    // public void deleteMsgById(int id){
-    //     Connection connection = ConnectionUtil.getConnection();
-    //     try {
-    //         String sql = "DELETE FROM message WHERE message_id = ?;";
-    //         PreparedStatement ps = connection.prepareStatement(sql);
-    //         ps.setInt(1, id);
-    //         ps.executeQuery();
-    //     }catch(SQLException e){
-    //         e.printStackTrace();
-    //     }
-    // }
+    public void deleteMsgById(int id){
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            String sql = "DELETE FROM message WHERE message_id = ?;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeQuery();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 
-    // public void updateMsgById(int id){
-    //     Connection connection = ConnectionUtil.getConnection();
-    //     try {
-    //         String sql = "SELECT * FROM Message WHERE message_id = (?);";
-    //         PreparedStatement ps = connection.prepareStatement(sql);
-    //         ps.setInt(1,id);
-    //         ps.executeQuery();
-    //     }catch(SQLException e){
-    //         e.printStackTrace();
-    //     }
-    // }
+    public void updateMsgById(int id, String message){
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            //Write SQL logic here
+            String sql = "UPDATE message SET message_text = ? WHERE message_id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ps.setString(1, message);
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     public List<Message> getMsgByUserId(int userId){
         Connection connection = ConnectionUtil.getConnection();

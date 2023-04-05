@@ -33,17 +33,17 @@ public class SocialMediaService {
         return socialMediaDAO.getAllMsg();
     }
     
-    public Message getMsgByIdHandler(int account_id) {
-        return socialMediaDAO.getMsgById(account_id);
+    public Message getMsgByIdHandler(int message_id) {
+        return socialMediaDAO.getMsgById(message_id);
     }
 
     // public Message deleteMsgByIdHandler(int id) {
     //     return socialMediaDAO.deleteMsgById(id);
     // }
 
-    // public void patchMsgByIdHandler(int message_id) {
-    //     return socialMediaDAO.updateMsgById(message_id);
-    // }
+    public void patchMsgByIdHandler(int message_id, String message_text) {
+        socialMediaDAO.updateMsgById(message_id, message_text);
+    }
 
     public List<Message> getMsgByUserIdHandler(int userId) {
         return socialMediaDAO.getMsgByUserId(userId);
