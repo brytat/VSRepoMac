@@ -100,7 +100,6 @@ public class SocialMediaController {
         ctx.json(socialMediaService.getAllMsg());
     }
 
-    // updated code!!!!
     private void getMsgByIdHandler(Context ctx) {
         Message message = socialMediaService.getMsgById(Integer.parseInt(ctx.pathParam("message_id")));
         if(message.message_id == 0){
