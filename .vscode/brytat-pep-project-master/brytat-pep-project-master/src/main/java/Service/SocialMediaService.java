@@ -37,9 +37,9 @@ public class SocialMediaService {
         return socialMediaDAO.getMsgById(message_id);
     }
 
-    // public Message deleteMsgByIdHandler(int id) {
-    //     return socialMediaDAO.deleteMsgById(id);
-    // }
+    public void deleteMsgByIdHandler(int id) {
+        socialMediaDAO.deleteMsgById(id);
+    }
 
     public void patchMsgByIdHandler(int message_id, String message_text) {
         socialMediaDAO.updateMsgById(message_id, message_text);
