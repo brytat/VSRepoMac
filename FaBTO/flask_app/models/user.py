@@ -16,6 +16,7 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password_hash = data['password_hash']
+        self.is_admin=data['is_admin']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -73,7 +74,7 @@ class User:
     
     @classmethod
     def leave_hub(cls, data):
-        query  = "DELETE FROM users_has_hubs WHERE deck_id = %(deck_id)s;"
+        query  = "DELETE FROM users_has_hubs WHERE user_id = %(user_id)s && hub_id = %(hub_id)s;"
         print("MySQL query: %(query)s")
         return connectToMySQL(cls.db_name).query_db(query, data)
 
@@ -118,3 +119,9 @@ class User:
         if is_valid:
             is_valid = user_instance.user_id
         return is_valid
+    
+    @classmethod
+    def delete_hero_in_DB(cls, data):
+        query  = "DELETE FROM heroes WHERE hero_id = %(hero_id)s;"
+        print("MySQL query: %(query)s")
+        return connectToMySQL(cls.db_name).query_db(query, data)

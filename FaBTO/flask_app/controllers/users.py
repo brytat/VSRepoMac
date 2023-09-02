@@ -41,7 +41,7 @@ def render_decks_page(user_id):
     dict = json.loads(data1)
     print(dict)
     listHeroes = []
-    for x in range(10):
+    for x in dict:
         listHeroes.append(dict['data'][x]['name'])
     print(listHeroes)
     #End of the API construction
