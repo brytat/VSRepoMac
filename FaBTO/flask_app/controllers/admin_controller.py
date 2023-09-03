@@ -18,11 +18,23 @@ def render_admin(user):
         return redirect('/')
     return render_template('adminHeroDBPage.html', pageName=pageName, user=user)
 
-@app.route('admin/hero/delete/<int:hero_id>')
-def delete_hero():
+@app.route('admin/hero/update_list')
+def update_hero_list():
     if session['user_id'] not in session:
         return redirect('/')
     if session['is_admin'] is False:
         return redirect('/')
-    User.delete_hero_in_DB(data)
+    Admin.update_hero_list()
+    return redirect('admin/hero/heroDB')
+
+@app.route('admin/hero/delete/<int:hero_id>')
+def delete_hero(hero_id):
+    if session['user_id'] not in session:
+        return redirect('/')
+    if session['is_admin'] is False:
+        return redirect('/')
+    data = {
+        "hero_id" : hero_id
+    }
+    Admin.delete_hero_in_DB(data)
     return redirect('/admin/hero/heroDB')

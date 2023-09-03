@@ -119,9 +119,3 @@ class User:
         if is_valid:
             is_valid = user_instance.user_id
         return is_valid
-    
-    @classmethod
-    def delete_hero_in_DB(cls, data):
-        query  = "DELETE FROM heroes WHERE hero_id = %(hero_id)s;"
-        print("MySQL query: %(query)s")
-        return connectToMySQL(cls.db_name).query_db(query, data)

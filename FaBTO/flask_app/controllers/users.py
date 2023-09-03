@@ -35,15 +35,15 @@ def render_decks_page(user_id):
     #print("From controller print var user: " + user)
     if "user_id" not in session:
         return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks)
-    url = "https://api.fabdb.net/cards/?keywords=hero&keywords=young".format(os.environ.get("73147f2ead15749ea59552e3940a6f9a9835eb861fd12052c1406a3897c7d9e9"))
-    response = urllib.request.urlopen(url)
-    data1 = response.read()
-    dict = json.loads(data1)
-    print(dict)
-    listHeroes = []
-    for x in dict:
-        listHeroes.append(dict['data'][x]['name'])
-    print(listHeroes)
+    # url = "https://api.fabdb.net/cards/?keywords=hero&keywords=young".format(os.environ.get("73147f2ead15749ea59552e3940a6f9a9835eb861fd12052c1406a3897c7d9e9"))
+    # response = urllib.request.urlopen(url)
+    # data1 = response.read()
+    # dict = json.loads(data1)
+    # print(dict)
+    # listHeroes = []
+    # for x in dict:
+    #     listHeroes.append(dict['data'][x]['name'])
+    # print(listHeroes)
     #End of the API construction
     return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks, heroes = listHeroes)
 
