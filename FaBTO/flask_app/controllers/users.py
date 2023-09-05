@@ -41,8 +41,10 @@ def render_decks_page(user_id):
     dict = json.loads(data1)
     print(dict)
     listHeroes = []
-    for x in range(10):
+    #REMOVE RANGE CONDITION!!!!!!
+    for x in dict: 
         listHeroes.append(dict['data'][x]['name'])
+    print("_______________________________________________________________________")
     print(listHeroes)
     #End of the API construction
     return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks, heroes = listHeroes)
