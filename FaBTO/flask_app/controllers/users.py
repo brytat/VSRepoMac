@@ -1,11 +1,8 @@
-
-from socket import herror
-from flask import render_template, session, redirect
-import os, urllib.request, json
-
+from flask_app import render_template, session, redirect
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.deck import Deck
+from flask_app.models.hero import Hero
 
 @app.route('/user/<string:user_id>')
 def render_user_page(user_id):
@@ -32,21 +29,7 @@ def render_decks_page(user_id):
     }
     decks = Deck.get_decks_from_one_user(data)
     user = User.get_one(data)
-    #print("From controller print var user: " + user)
-    if "user_id" not in session:
-        return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks)
-    url = "https://api.fabdb.net/cards/?keywords=hero&keywords=young".format(os.environ.get("73147f2ead15749ea59552e3940a6f9a9835eb861fd12052c1406a3897c7d9e9"))
-    response = urllib.request.urlopen(url)
-    data1 = response.read()
-    dict = json.loads(data1)
-    print(dict)
-    listHeroes = []
-    #REMOVE RANGE CONDITION!!!!!!
-    for x in dict: 
-        listHeroes.append(dict['data'][x]['name'])
-    print("_______________________________________________________________________")
-    print(listHeroes)
-    #End of the API construction
+    listHeroes = Hero.get_hero_list()
     return render_template('User/displayDecks.html', pageName=pageName, user=user, decks=decks, heroes = listHeroes)
 
 @app.route('/user/<string:user_id>/hubs')

@@ -37,7 +37,7 @@ public class SocialMediaService {
         return socialMediaDAO.getMsgById(message_id);
     }
 
-    public void deleteMsgByIdHandler(int id) {
+    public void deleteMsgById(int id) {
         socialMediaDAO.deleteMsgById(id);
     }
 

@@ -83,3 +83,8 @@ def signup_form_hub():
 def log_out():
     session.clear()
     return redirect("/signup")
+
+@app.route("/denied")
+def denied_template():
+    pageName = "Access Denied"
+    return render_template('acessDenied.html', pageName = pageName)
