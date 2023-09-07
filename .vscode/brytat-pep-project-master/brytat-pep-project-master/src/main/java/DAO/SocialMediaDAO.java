@@ -33,9 +33,6 @@ public class SocialMediaDAO {
             if(pkeyrs.next()){
                 int generated_acct_id = pkeyrs.getInt(1);
                 System.out.println("in the if statement: " + generated_acct_id);
-                // int posted_by = pkeyrs.getInt(2);
-                // String message_text = pkeyrs.getString(3);
-                // long time_posted = pkeyrs.getLong(4);
                 return new Account(generated_acct_id, account.getUsername(), account.getPassword());
             }
         }catch(SQLException e){
@@ -90,9 +87,6 @@ public class SocialMediaDAO {
             if(pkeyrs.next()){
                 int generated_msg_id = pkeyrs.getInt(1);
                 System.out.println("in the if statement: " + generated_msg_id);
-                // int posted_by = pkeyrs.getInt(2);
-                // String message_text = pkeyrs.getString(3);
-                // long time_posted = pkeyrs.getLong(4);
                 return new Message(generated_msg_id, message.getPosted_by(), message.getMessage_text(), message.getTime_posted_epoch());
             }
         }catch(SQLException e){
@@ -135,7 +129,6 @@ public class SocialMediaDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                // Message message = new Message(rs.getInt("message_id"), rs.getInt("posted_by"), rs.getString("message_text"), rs.getLong("time_posted_epoch"));
                 message.setMessage_id(rs.getInt("message_id"));
                 message.setPosted_by(rs.getInt("posted_by"));
                 message.setMessage_text(rs.getString("message_text"));
@@ -152,14 +145,11 @@ public class SocialMediaDAO {
     public void deleteMsgById(int id){
         Connection connection = ConnectionUtil.getConnection();
         try {
-            //if(){
-
-            //}else{
-                String sql = "DELETE FROM message WHERE message_id = ?;";
-                PreparedStatement ps = connection.prepareStatement(sql);
-                ps.setInt(1, id);
-                ps.executeQuery();
-            //}
+            //Write SQL logic here
+            String sql = "DELETE FROM message WHERE message_id = ?;";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeQuery();
         }catch(SQLException e){
             e.printStackTrace();
         }
