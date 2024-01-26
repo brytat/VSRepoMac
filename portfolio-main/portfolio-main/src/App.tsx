@@ -6,10 +6,9 @@ import {
 } from "react-router-dom";
 import HomePage from "./pages/home-page";
 import AboutPage from "./pages/about-page";
-import ProjectsPage from "./pages/projects-page";
-import RegisterPage from "./pages/register-page";
 import "./App.css";
 import Layout from "./components/layout";
+import RegisterPage from "./pages/register-page";
 
 // Components are capitalized
 function App() {
@@ -22,8 +21,7 @@ function App() {
         {/* Child pages will be displayed here */}
         <Route index element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/projects" element={<ProjectsPage/>}/>
-        <Route path="/register" element={<RegisterPage/>}/>
+        <Route path="/register" element={<RegisterPage />} />
       </Route>,
     ),
   );
