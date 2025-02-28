@@ -14,6 +14,7 @@ class User:
         self.username = data['username']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
+        self.gem = data['gem']
         self.email = data['email']
         self.password_hash = data['password_hash']
         self.is_admin=data['is_admin']
@@ -81,13 +82,13 @@ class User:
     @staticmethod
     def validate_user(user):
         is_valid = True
-        if len(user['username']) < 3:
+        if len(user['username']) < 2:
             flash("Username must be at least 3 characters.")
             is_valid = False
-        if len(user['first_name']) < 3:
+        if len(user['first_name']) < 2:
             flash("First name must be at least 3 characters.")
             is_valid = False
-        if len(user['last_name']) < 3:
+        if len(user['last_name']) < 2:
             flash("Last name must be at least 3 characters.")
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):
